@@ -10,8 +10,8 @@ import java.io.IOException;
 public class ViewHandler {
     private final Stage stage;
 
-    public ViewHandler() {
-        stage = new Stage();
+    public ViewHandler(Stage stage) {
+        this.stage = stage;
     }
 
     public void start() {
@@ -20,9 +20,11 @@ public class ViewHandler {
 
     public void openApplicationView() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(ProbabilisticModelingApplication.class.getResource("application-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(
+                    ProbabilisticModelingApplication.class.getResource("application-view.fxml")
+            );
             Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
-            stage.setTitle("Hello!");
+            stage.setTitle("Імовірнісне моделювання(Луцюк Є.В. - ЛР№2)");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
