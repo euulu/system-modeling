@@ -1,14 +1,13 @@
 package org.eulu.probabilisticmodeling.view;
 
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
 public class ApplicationViewController {
     @FXML
-    private Label welcomeText;
+    public MFXTextField tfUpperBound;
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    public void init() {
+        System.out.println("test");
     }
 }
