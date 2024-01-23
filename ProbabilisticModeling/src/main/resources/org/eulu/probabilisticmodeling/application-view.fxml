@@ -20,6 +20,7 @@
     </rowConstraints>
     <VBox prefHeight="200.0" prefWidth="100.0" styleClass="sidebar-bg" GridPane.columnIndex="1">
         <MFXTextField fx:id="tfUpperBound" floatMode="BORDER" floatingText="Верхня межа" prefWidth="Infinity"/>
+        <MFXTextField fx:id="tfGroupCount" floatMode="BORDER" floatingText="Кількість проміжків" prefWidth="Infinity"/>
         <Pane VBox.vgrow="ALWAYS"/>
     </VBox>
     <VBox prefHeight="200.0" prefWidth="100.0" styleClass="main-bg"/>
