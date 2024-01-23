@@ -6,6 +6,7 @@ import io.github.palexdev.materialfx.theming.UserAgentBuilder;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.eulu.probabilisticmodeling.core.ViewHandler;
+import org.eulu.probabilisticmodeling.core.ViewModelFactory;
 
 public class ProbabilisticModelingApplication extends Application {
     @Override
@@ -18,7 +19,8 @@ public class ProbabilisticModelingApplication extends Application {
                 .build() // Assembles all the added themes into a single CSSFragment (very powerful class check its documentation)
                 .setGlobal(); // Finally, sets the produced stylesheet as the global User-Agent stylesheet
 
-        ViewHandler viewHandler = new ViewHandler(stage);
+        ViewModelFactory viewModelFactory = new ViewModelFactory();
+        ViewHandler viewHandler = new ViewHandler(stage, viewModelFactory);
         viewHandler.start();
     }
 }

@@ -7,7 +7,7 @@ public class ApplicationViewController {
     @FXML
     public MFXTextField tfUpperBound;
 
-    public void init() {
-        System.out.println("test");
+    public void init(ApplicationViewModel applicationViewModel) {
+        tfUpperBound.textProperty().bind(applicationViewModel.upperBoundProperty());
     }
 }
