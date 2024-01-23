@@ -12,9 +12,12 @@ public class ApplicationViewController {
     public MFXTextField tfUpperBound;
     @FXML
     public MFXTextField tfGroupCount;
+    @FXML
+    public GridPane gpWrapper;
 
     public void init(ApplicationViewModel applicationViewModel) {
         tfUpperBound.textProperty().bind(applicationViewModel.upperBoundProperty());
         tfGroupCount.textProperty().bind(applicationViewModel.groupCountProperty());
+        gpWrapper.requestFocus();
     }
 }
