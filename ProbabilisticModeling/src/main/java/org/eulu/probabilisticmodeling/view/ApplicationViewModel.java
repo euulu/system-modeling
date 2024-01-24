@@ -2,13 +2,16 @@ package org.eulu.probabilisticmodeling.view;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.eulu.probabilisticmodeling.model.NumbersGenerator;
 
 public class ApplicationViewModel {
+    private final NumbersGenerator numbersGenerator;
     private final StringProperty upperBound;
     private final StringProperty groupCount;
     private final StringProperty generationCount;
 
-    public ApplicationViewModel() {
+    public ApplicationViewModel(NumbersGenerator numbersGenerator) {
+        this.numbersGenerator = numbersGenerator;
         this.upperBound = new SimpleStringProperty();
         this.groupCount = new SimpleStringProperty();
         this.generationCount = new SimpleStringProperty();
@@ -35,6 +38,6 @@ public class ApplicationViewModel {
     }
 
     public void generateData() {
-        System.out.println("ApplicationViewModel::generateData");
+        numbersGenerator.generateNumbers();
     }
 }
