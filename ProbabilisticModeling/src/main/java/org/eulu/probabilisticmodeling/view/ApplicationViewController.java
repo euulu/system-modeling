@@ -28,4 +28,8 @@ public class ApplicationViewController {
     public void onBtnImport(ActionEvent event) {
         applicationViewModel.importFromExcel();
     }
+
+    public void onBtnExport(ActionEvent event) {
+        applicationViewModel.exportToExcel();
+    }
 }

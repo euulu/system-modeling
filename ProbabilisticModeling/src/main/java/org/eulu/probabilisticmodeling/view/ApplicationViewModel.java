@@ -29,4 +29,8 @@ public class ApplicationViewModel {
     public void importFromExcel() {
         System.out.println("ApplicationViewModel::excelImport");
     }
+
+    public void exportToExcel() {
+        System.out.println("ApplicationViewModel::exportToExcel");
+    }
 }
