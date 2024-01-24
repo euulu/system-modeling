@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.scene.layout.*?>
 <GridPane fx:id="gpWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eulu.probabilisticmodeling.view.ApplicationViewController">
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
@@ -25,5 +19,12 @@
       <MFXButton onAction="#onBtnExport" prefWidth="Infinity" text="Експортувати в Excel" />
       <MFXButton onAction="#onBtnGenerateData" prefWidth="Infinity" text="Згенерувати" />
     </VBox>
-    <VBox prefHeight="200.0" prefWidth="100.0" styleClass="main-bg" />
+    <VBox prefHeight="200.0" prefWidth="100.0" styleClass="main-bg">
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <MFXListView fx:id="lvGeneratedNumbers">
+                <GridPane.margin>
+                </GridPane.margin>
+            </MFXListView>
+        </HBox>
+    </VBox>
 </GridPane>
