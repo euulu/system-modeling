@@ -8,4 +8,5 @@ module org.eulu.probabilisticmodeling {
     exports org.eulu.probabilisticmodeling;
     exports org.eulu.probabilisticmodeling.view;
     opens org.eulu.probabilisticmodeling.view to javafx.fxml;
+    exports org.eulu.probabilisticmodeling.model;
 }
