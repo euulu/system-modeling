@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -20,6 +21,7 @@
         <MFXTextField fx:id="tfGroupCount" floatMode="BORDER" floatingText="Кількість проміжків" prefWidth="Infinity" />
       <MFXTextField fx:id="tfGenerationCount" floatMode="BORDER" floatingText="Кількість випробувань" prefWidth="Infinity" />
         <Pane VBox.vgrow="ALWAYS" />
+      <MFXButton onAction="#onBtnImport" prefWidth="Infinity" text="Імпортувати з Excel" />
     </VBox>
     <VBox prefHeight="200.0" prefWidth="100.0" styleClass="main-bg" />
 </GridPane>

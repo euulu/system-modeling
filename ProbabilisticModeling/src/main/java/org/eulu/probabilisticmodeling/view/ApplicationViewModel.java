@@ -25,4 +25,8 @@ public class ApplicationViewModel {
     public StringProperty generationCountProperty() {
         return generationCount;
     }
+
+    public void importFromExcel() {
+        System.out.println("ApplicationViewModel::excelImport");
+    }
 }
