@@ -1,5 +1,6 @@
 package org.eulu.probabilisticmodeling.view;
 
+import io.github.palexdev.materialfx.controls.MFXListView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,15 +15,18 @@ public class ApplicationViewController {
     public MFXTextField tfGenerationCount;
     @FXML
     public GridPane gpWrapper;
+    @FXML
+    public MFXListView<String> lvGeneratedNumbers;
 
     private ApplicationViewModel applicationViewModel;
 
     public void init(ApplicationViewModel applicationViewModel) {
         this.applicationViewModel = applicationViewModel;
-        tfUpperBound.textProperty().bind(applicationViewModel.upperBoundProperty());
-        tfGroupCount.textProperty().bind(applicationViewModel.groupCountProperty());
-        tfGenerationCount.textProperty().bind(applicationViewModel.generationCountProperty());
+        tfUpperBound.textProperty().bindBidirectional(applicationViewModel.upperBoundProperty());
+        tfGroupCount.textProperty().bindBidirectional(applicationViewModel.groupCountProperty());
+        tfGenerationCount.textProperty().bindBidirectional(applicationViewModel.generationCountProperty());
         gpWrapper.requestFocus();
+        lvGeneratedNumbers.setItems(applicationViewModel.getGeneratedNumbers());
     }
 
     public void onBtnImport(ActionEvent event) {

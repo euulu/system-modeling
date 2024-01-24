@@ -2,6 +2,8 @@ package org.eulu.probabilisticmodeling.view;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.eulu.probabilisticmodeling.model.NumbersGenerator;
 
 public class ApplicationViewModel {
@@ -9,6 +11,7 @@ public class ApplicationViewModel {
     private final StringProperty upperBound;
     private final StringProperty groupCount;
     private final StringProperty generationCount;
+    private final ObservableList<String> generatedNumbers = FXCollections.observableArrayList();
 
     public ApplicationViewModel(NumbersGenerator numbersGenerator) {
         this.numbersGenerator = numbersGenerator;
@@ -29,6 +32,10 @@ public class ApplicationViewModel {
         return generationCount;
     }
 
+    public ObservableList<String> getGeneratedNumbers() {
+        return generatedNumbers;
+    }
+
     public void importFromExcel() {
         System.out.println("ApplicationViewModel::excelImport");
     }
@@ -38,6 +45,19 @@ public class ApplicationViewModel {
     }
 
     public void generateData() {
-        numbersGenerator.generateNumbers();
+        int[] numbers = numbersGenerator.generateNumbers(
+                Integer.parseInt(upperBound.getValue()),
+                Integer.parseInt(groupCount.getValue()),
+                Integer.parseInt(generationCount.getValue())
+        );
+
+        setGeneratedNumbers(numbers);
+    }
+
+    private void setGeneratedNumbers(int[] numbers) {
+        generatedNumbers.clear();
+        for (int number : numbers) {
+            generatedNumbers.add(String.valueOf(number));
+        }
     }
 }
