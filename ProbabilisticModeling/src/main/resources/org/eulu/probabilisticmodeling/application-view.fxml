@@ -23,6 +23,7 @@
         <Pane VBox.vgrow="ALWAYS" />
       <MFXButton onAction="#onBtnImport" prefWidth="Infinity" text="Імпортувати з Excel" />
       <MFXButton onAction="#onBtnExport" prefWidth="Infinity" text="Експортувати в Excel" />
+      <MFXButton onAction="#onBtnGenerateData" prefWidth="Infinity" text="Згенерувати" />
     </VBox>
     <VBox prefHeight="200.0" prefWidth="100.0" styleClass="main-bg" />
 </GridPane>

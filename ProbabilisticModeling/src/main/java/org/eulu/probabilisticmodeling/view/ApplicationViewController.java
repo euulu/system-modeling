@@ -32,4 +32,8 @@ public class ApplicationViewController {
     public void onBtnExport(ActionEvent event) {
         applicationViewModel.exportToExcel();
     }
+
+    public void onBtnGenerateData(ActionEvent event) {
+        applicationViewModel.generateData();
+    }
 }

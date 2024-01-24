@@ -33,4 +33,8 @@ public class ApplicationViewModel {
     public void exportToExcel() {
         System.out.println("ApplicationViewModel::exportToExcel");
     }
+
+    public void generateData() {
+        System.out.println("ApplicationViewModel::generateData");
+    }
 }
