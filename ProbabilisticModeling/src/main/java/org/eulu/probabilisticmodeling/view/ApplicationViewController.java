@@ -4,6 +4,7 @@ import io.github.palexdev.materialfx.controls.MFXListView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
 import javafx.scene.layout.GridPane;
 
 public class ApplicationViewController {
@@ -17,6 +18,8 @@ public class ApplicationViewController {
     public GridPane gpWrapper;
     @FXML
     public MFXListView<String> lvGeneratedNumbers;
+    @FXML
+    public BarChart<String, Integer> bcStandardGenerator;
 
     private ApplicationViewModel applicationViewModel;
 
@@ -27,6 +30,8 @@ public class ApplicationViewController {
         tfGenerationCount.textProperty().bindBidirectional(applicationViewModel.generationCountProperty());
         gpWrapper.requestFocus();
         lvGeneratedNumbers.setItems(applicationViewModel.getGeneratedNumbers());
+        bcStandardGenerator.setAnimated(false);
+        bcStandardGenerator.setData(applicationViewModel.getNumbersInGroupsCountProperty());
     }
 
     public void onBtnImport(ActionEvent event) {
