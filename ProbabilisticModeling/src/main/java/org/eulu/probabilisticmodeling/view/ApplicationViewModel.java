@@ -45,10 +45,14 @@ public class ApplicationViewModel {
     }
 
     public void generateData() {
+        int upperBoundInt = Integer.parseInt(upperBound.getValue());
+        int groupCountInt = Integer.parseInt(groupCount.getValue());
+        int generationCountInt = Integer.parseInt(generationCount.getValue());
+
         int[] numbers = numbersGenerator.generateNumbers(
-                Integer.parseInt(upperBound.getValue()),
-                Integer.parseInt(groupCount.getValue()),
-                Integer.parseInt(generationCount.getValue())
+                upperBoundInt,
+                groupCountInt,
+                generationCountInt
         );
 
         setGeneratedNumbers(numbers);
