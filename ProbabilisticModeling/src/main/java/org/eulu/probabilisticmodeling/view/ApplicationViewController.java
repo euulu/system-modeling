@@ -2,7 +2,6 @@ package org.eulu.probabilisticmodeling.view;
 
 import io.github.palexdev.materialfx.controls.MFXListView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.layout.GridPane;
@@ -34,15 +33,15 @@ public class ApplicationViewController {
         bcStandardGenerator.setData(applicationViewModel.getNumbersInGroupsCountProperty());
     }
 
-    public void onBtnImport(ActionEvent event) {
+    public void onBtnImport() {
         applicationViewModel.importFromExcel();
     }
 
-    public void onBtnExport(ActionEvent event) {
+    public void onBtnExport() {
         applicationViewModel.exportToExcel();
     }
 
-    public void onBtnGenerateData(ActionEvent event) {
+    public void onBtnGenerateData() {
         applicationViewModel.generateData();
     }
 }
