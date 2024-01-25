@@ -57,7 +57,6 @@ public class ApplicationViewModel {
 
         int[] numbers = numbersGenerator.generateNumbers(
                 upperBoundInt,
-                groupCountInt,
                 generationCountInt
         );
         setGeneratedNumbers(numbers);
