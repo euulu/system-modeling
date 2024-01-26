@@ -4,7 +4,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import org.eulu.probabilisticmodeling.model.NumbersGenerator;
 
 public class ApplicationViewModel {
@@ -80,7 +84,18 @@ public class ApplicationViewModel {
         numbersInGroupsCount.clear();
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
         for (int i = 0; i < numbersCount.length; i++) {
-            series.getData().add(new XYChart.Data<>(String.valueOf(i), numbersCount[i]));
+            XYChart.Data<String, Integer> data = new XYChart.Data<>(String.valueOf(i), numbersCount[i]);
+            Label label = new Label(data.getYValue() + "");
+            label.getStyleClass().add("bar-value-label");
+            label.setPadding(new Insets(8, 0, 0, 0));
+            data.nodeProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    StackPane stackPane = (StackPane) newValue;
+                    stackPane.setAlignment(Pos.TOP_CENTER);
+                    stackPane.getChildren().add(label);
+                }
+            });
+            series.getData().add(data);
         }
         numbersInGroupsCount.add(series);
     }
