@@ -29,7 +29,6 @@ public class ApplicationViewController {
         tfGenerationCount.textProperty().bindBidirectional(applicationViewModel.generationCountProperty());
         gpWrapper.requestFocus();
         lvGeneratedNumbers.setItems(applicationViewModel.getGeneratedNumbers());
-        bcStandardGenerator.setAnimated(false);
         bcStandardGenerator.setData(applicationViewModel.getNumbersInGroupsCountProperty());
     }
 
