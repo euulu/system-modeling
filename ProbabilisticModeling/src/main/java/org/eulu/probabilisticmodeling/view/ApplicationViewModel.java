@@ -16,8 +16,9 @@ public class ApplicationViewModel {
     private final StringProperty upperBound;
     private final StringProperty groupCount;
     private final StringProperty generationCount;
-    private final ObservableList<String> generatedNumbers = FXCollections.observableArrayList();
     private final ObservableList<XYChart.Series<String, Integer>> numbersInGroupsCount = FXCollections.observableArrayList();
+    private final ObservableList<String> numbersInGroupsCountLegend = FXCollections.observableArrayList();
+    private final ObservableList<String> generatedNumbers = FXCollections.observableArrayList();
 
     public ApplicationViewModel(NumbersGenerator numbersGenerator) {
         this.numbersGenerator = numbersGenerator;
@@ -38,12 +39,16 @@ public class ApplicationViewModel {
         return generationCount;
     }
 
-    public ObservableList<String> getGeneratedNumbers() {
-        return generatedNumbers;
+    public ObservableList<String> getNumbersInGroupsCountLegendProperty() {
+        return numbersInGroupsCountLegend;
     }
 
     public ObservableList<XYChart.Series<String, Integer>> getNumbersInGroupsCountProperty() {
         return numbersInGroupsCount;
+    }
+
+    public ObservableList<String> getGeneratedNumbers() {
+        return generatedNumbers;
     }
 
     public void importFromExcel() {
@@ -70,6 +75,7 @@ public class ApplicationViewModel {
                 upperBoundInt,
                 groupCountInt
         );
+        setNumbersInGroupsCountLegend(numbersInGroupsCount);
         setNumbersInGroupsCount(numbersInGroupsCount);
     }
 
@@ -77,6 +83,13 @@ public class ApplicationViewModel {
         generatedNumbers.clear();
         for (int number : numbers) {
             generatedNumbers.add(String.valueOf(number));
+        }
+    }
+
+    private void setNumbersInGroupsCountLegend(int[] numbersInGroupsCount) {
+        numbersInGroupsCountLegend.clear();
+        for (int number : numbersInGroupsCount) {
+            numbersInGroupsCountLegend.add(String.valueOf(number));
         }
     }
 
