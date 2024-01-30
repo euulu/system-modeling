@@ -16,9 +16,9 @@ public class ApplicationViewModel {
     private final StringProperty upperBound;
     private final StringProperty groupCount;
     private final StringProperty generationCount;
-    private final ObservableList<XYChart.Series<String, Integer>> numbersInGroupsCount = FXCollections.observableArrayList();
-    private final ObservableList<String> numbersInGroupsCountLegend = FXCollections.observableArrayList();
-    private final ObservableList<String> generatedNumbers = FXCollections.observableArrayList();
+    private final ObservableList<XYChart.Series<String, Integer>> groupCountStandard = FXCollections.observableArrayList();
+    private final ObservableList<String> groupCountLegendStandard = FXCollections.observableArrayList();
+    private final ObservableList<String> numbersStandard = FXCollections.observableArrayList();
 
     public ApplicationViewModel(NumbersGenerator numbersGenerator) {
         this.numbersGenerator = numbersGenerator;
@@ -39,16 +39,16 @@ public class ApplicationViewModel {
         return generationCount;
     }
 
-    public ObservableList<String> getNumbersInGroupsCountLegendProperty() {
-        return numbersInGroupsCountLegend;
+    public ObservableList<String> getGroupCountLegendStandardProperty() {
+        return groupCountLegendStandard;
     }
 
-    public ObservableList<XYChart.Series<String, Integer>> getNumbersInGroupsCountProperty() {
-        return numbersInGroupsCount;
+    public ObservableList<XYChart.Series<String, Integer>> getGroupCountStandardProperty() {
+        return groupCountStandard;
     }
 
-    public ObservableList<String> getGeneratedNumbers() {
-        return generatedNumbers;
+    public ObservableList<String> getNumbersStandard() {
+        return numbersStandard;
     }
 
     public void importFromExcel() {
@@ -64,37 +64,37 @@ public class ApplicationViewModel {
         int groupCountInt = Integer.parseInt(groupCount.getValue());
         int generationCountInt = Integer.parseInt(generationCount.getValue());
 
-        int[] numbers = numbersGenerator.generateNumbers(
+        int[] numbers = numbersGenerator.generateNumbersStandard(
                 upperBoundInt,
                 generationCountInt
         );
-        setGeneratedNumbers(numbers);
+        setNumbersStandard(numbers);
 
         int[] numbersInGroupsCount = numbersGenerator.countNumbersInGroups(
                 numbers,
                 upperBoundInt,
                 groupCountInt
         );
-        setNumbersInGroupsCountLegend(numbersInGroupsCount);
-        setNumbersInGroupsCount(numbersInGroupsCount);
+        setGroupCountLegendStandard(numbersInGroupsCount);
+        setGroupCountStandard(numbersInGroupsCount);
     }
 
-    private void setGeneratedNumbers(int[] numbers) {
-        generatedNumbers.clear();
+    private void setNumbersStandard(int[] numbers) {
+        numbersStandard.clear();
         for (int number : numbers) {
-            generatedNumbers.add(String.valueOf(number));
+            numbersStandard.add(String.valueOf(number));
         }
     }
 
-    private void setNumbersInGroupsCountLegend(int[] numbersInGroupsCount) {
-        numbersInGroupsCountLegend.clear();
+    private void setGroupCountLegendStandard(int[] numbersInGroupsCount) {
+        groupCountLegendStandard.clear();
         for (int number : numbersInGroupsCount) {
-            numbersInGroupsCountLegend.add(String.valueOf(number));
+            groupCountLegendStandard.add(String.valueOf(number));
         }
     }
 
-    private void setNumbersInGroupsCount(int[] numbersCount) {
-        numbersInGroupsCount.clear();
+    private void setGroupCountStandard(int[] numbersCount) {
+        groupCountStandard.clear();
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
         for (int i = 0; i < numbersCount.length; i++) {
             XYChart.Data<String, Integer> data = new XYChart.Data<>(String.valueOf(i), numbersCount[i]);
@@ -110,6 +110,6 @@ public class ApplicationViewModel {
             });
             series.getData().add(data);
         }
-        numbersInGroupsCount.add(series);
+        groupCountStandard.add(series);
     }
 }

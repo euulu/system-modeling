@@ -19,11 +19,11 @@ public class ApplicationViewController {
     @FXML
     public GridPane gpWrapper;
     @FXML
-    public MFXListView<String> lvGeneratedNumbers;
-    @FXML
-    public BarChart<String, Integer> bcStandardGenerator;
+    public BarChart<String, Integer> bcStandard;
     @FXML
     public MFXListView<String> lvLegendStandard;
+    @FXML
+    public MFXListView<String> lvGeneratedNumbersStandard;
 
     private ApplicationViewModel applicationViewModel;
 
@@ -33,10 +33,10 @@ public class ApplicationViewController {
         tfGroupCount.textProperty().bindBidirectional(applicationViewModel.groupCountProperty());
         tfGenerationCount.textProperty().bindBidirectional(applicationViewModel.generationCountProperty());
         gpWrapper.requestFocus();
-        bcStandardGenerator.setData(applicationViewModel.getNumbersInGroupsCountProperty());
-        lvLegendStandard.setItems(applicationViewModel.getNumbersInGroupsCountLegendProperty());
+        bcStandard.setData(applicationViewModel.getGroupCountStandardProperty());
+        lvLegendStandard.setItems(applicationViewModel.getGroupCountLegendStandardProperty());
         lvLegendStandard.setCellFactory(legendItem -> new LegendCellFactory(lvLegendStandard, legendItem));
-        lvGeneratedNumbers.setItems(applicationViewModel.getGeneratedNumbers());
+        lvGeneratedNumbersStandard.setItems(applicationViewModel.getNumbersStandard());
     }
 
     public void onBtnImport() {

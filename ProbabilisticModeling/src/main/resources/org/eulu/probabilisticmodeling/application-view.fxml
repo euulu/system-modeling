@@ -24,7 +24,7 @@
     </VBox>
     <VBox prefHeight="200.0" prefWidth="100.0" styleClass="main-bg">
         <HBox prefHeight="100.0" prefWidth="200.0">
-         <BarChart fx:id="bcStandardGenerator" HBox.hgrow="ALWAYS" animated="false">
+         <BarChart fx:id="bcStandard" HBox.hgrow="ALWAYS" animated="false">
            <xAxis>
              <CategoryAxis side="BOTTOM" />
            </xAxis>
@@ -36,7 +36,7 @@
                 <GridPane.margin>
                 </GridPane.margin>
             </MFXListView>
-            <MFXListView fx:id="lvGeneratedNumbers">
+            <MFXListView fx:id="lvGeneratedNumbersStandard">
                 <GridPane.margin>
                 </GridPane.margin>
             </MFXListView>
