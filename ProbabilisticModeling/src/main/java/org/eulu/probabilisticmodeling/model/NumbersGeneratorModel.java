@@ -14,6 +14,21 @@ public class NumbersGeneratorModel implements NumbersGenerator {
         return generatedNumbers;
     }
 
+    @Override
+    public int[] generateNumbersMidSquare(int upperBound, int generationCount) {
+        int[] generatedNumbers = new int[generationCount];
+        int seed = 1234;
+        for (int i = 0; i < generationCount; i++) {
+            String squaredSeed = String.format("%08d", (seed * seed));
+            int randomNumber = Integer.parseInt(squaredSeed.substring(2, 6));
+            seed = randomNumber;
+            generatedNumbers[i] = randomNumber % upperBound;
+        }
+
+        return generatedNumbers;
+    }
+
+    @Override
     public int[] countNumbersInGroups(int[] numbers, int upperBound, int groupCount) {
         int[] counter = new int[groupCount];
         int chunkSize = upperBound / groupCount;
@@ -27,4 +42,6 @@ public class NumbersGeneratorModel implements NumbersGenerator {
 
         return counter;
     }
+
+
 }
