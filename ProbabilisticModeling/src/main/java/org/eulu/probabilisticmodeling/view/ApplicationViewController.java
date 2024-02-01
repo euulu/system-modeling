@@ -21,9 +21,16 @@ public class ApplicationViewController {
     @FXML
     public BarChart<String, Integer> bcStandard;
     @FXML
+    public BarChart<String, Integer> bcMidSquare;
+    @FXML
     public MFXListView<String> lvLegendStandard;
     @FXML
+    public MFXListView<String> lvLegendMidSquare;
+    @FXML
     public MFXListView<String> lvGeneratedNumbersStandard;
+    @FXML
+    public MFXListView<String> lvGeneratedNumbersMidSquare;
+
 
     private ApplicationViewModel applicationViewModel;
 
