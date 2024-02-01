@@ -5,38 +5,60 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.layout.*?>
-<GridPane fx:id="gpWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eulu.probabilisticmodeling.view.ApplicationViewController">
+<GridPane fx:id="gpWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+          prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="org.eulu.probabilisticmodeling.view.ApplicationViewController">
     <columnConstraints>
-        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="150.0" percentWidth="20.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" percentWidth="80.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="150.0" percentWidth="20.0"
+                           prefWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <VBox prefHeight="200.0" prefWidth="100.0" styleClass="sidebar-bg" GridPane.columnIndex="1">
-        <MFXTextField fx:id="tfUpperBound" floatMode="BORDER" floatingText="Верхня межа" prefWidth="Infinity" />
-        <MFXTextField fx:id="tfGroupCount" floatMode="BORDER" floatingText="Кількість проміжків" prefWidth="Infinity" />
-      <MFXTextField fx:id="tfGenerationCount" floatMode="BORDER" floatingText="Кількість випробувань" prefWidth="Infinity" />
-        <Pane VBox.vgrow="ALWAYS" />
-      <MFXButton onAction="#onBtnImport" prefWidth="Infinity" text="Імпортувати з Excel" />
-      <MFXButton onAction="#onBtnExport" prefWidth="Infinity" text="Експортувати в Excel" />
-      <MFXButton onAction="#onBtnGenerateData" prefWidth="Infinity" text="Згенерувати" />
+        <MFXTextField fx:id="tfUpperBound" floatMode="BORDER" floatingText="Верхня межа" prefWidth="Infinity"/>
+        <MFXTextField fx:id="tfGroupCount" floatMode="BORDER" floatingText="Кількість проміжків" prefWidth="Infinity"/>
+        <MFXTextField fx:id="tfGenerationCount" floatMode="BORDER" floatingText="Кількість випробувань"
+                      prefWidth="Infinity"/>
+        <Pane VBox.vgrow="ALWAYS"/>
+        <MFXButton onAction="#onBtnImport" prefWidth="Infinity" text="Імпортувати з Excel"/>
+        <MFXButton onAction="#onBtnExport" prefWidth="Infinity" text="Експортувати в Excel"/>
+        <MFXButton onAction="#onBtnGenerateData" prefWidth="Infinity" text="Згенерувати"/>
     </VBox>
     <VBox prefHeight="200.0" prefWidth="100.0" styleClass="main-bg">
         <HBox prefHeight="100.0" prefWidth="200.0">
-         <BarChart fx:id="bcStandard" HBox.hgrow="ALWAYS" animated="false">
-           <xAxis>
-             <CategoryAxis side="BOTTOM" />
-           </xAxis>
-           <yAxis>
-             <NumberAxis side="LEFT" />
-           </yAxis>
-         </BarChart>
+            <BarChart fx:id="bcStandard" HBox.hgrow="ALWAYS" animated="false">
+                <xAxis>
+                    <CategoryAxis side="BOTTOM"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis side="LEFT"/>
+                </yAxis>
+            </BarChart>
             <MFXListView fx:id="lvLegendStandard">
                 <GridPane.margin>
                 </GridPane.margin>
             </MFXListView>
             <MFXListView fx:id="lvGeneratedNumbersStandard">
+                <GridPane.margin>
+                </GridPane.margin>
+            </MFXListView>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <BarChart fx:id="bcMidSquare" HBox.hgrow="ALWAYS" animated="false">
+                <xAxis>
+                    <CategoryAxis side="BOTTOM"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis side="LEFT"/>
+                </yAxis>
+            </BarChart>
+            <MFXListView fx:id="lvLegendMidSquare">
+                <GridPane.margin>
+                </GridPane.margin>
+            </MFXListView>
+            <MFXListView fx:id="lvGeneratedNumbersMidSquare">
                 <GridPane.margin>
                 </GridPane.margin>
             </MFXListView>
