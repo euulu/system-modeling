@@ -63,5 +63,23 @@
                 </GridPane.margin>
             </MFXListView>
         </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <BarChart fx:id="bcLinear" HBox.hgrow="ALWAYS" animated="false">
+                <xAxis>
+                    <CategoryAxis side="BOTTOM"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis side="LEFT"/>
+                </yAxis>
+            </BarChart>
+            <MFXListView fx:id="lvLegendLinear">
+                <GridPane.margin>
+                </GridPane.margin>
+            </MFXListView>
+            <MFXListView fx:id="lvGeneratedNumbersLinear">
+                <GridPane.margin>
+                </GridPane.margin>
+            </MFXListView>
+        </HBox>
     </VBox>
 </GridPane>
