@@ -40,10 +40,16 @@ public class ApplicationViewController {
         tfGroupCount.textProperty().bindBidirectional(applicationViewModel.groupCountProperty());
         tfGenerationCount.textProperty().bindBidirectional(applicationViewModel.generationCountProperty());
         gpWrapper.requestFocus();
+        // Standard method
         bcStandard.setData(applicationViewModel.getGroupCountStandardProperty());
         lvLegendStandard.setItems(applicationViewModel.getGroupCountLegendStandardProperty());
         lvLegendStandard.setCellFactory(legendItem -> new LegendCellFactory(lvLegendStandard, legendItem));
         lvGeneratedNumbersStandard.setItems(applicationViewModel.getNumbersStandard());
+        // Middle square method
+        bcMidSquare.setData(applicationViewModel.getGroupCountMidSquareProperty());
+        lvGeneratedNumbersMidSquare.setItems(applicationViewModel.getNumbersMidSquare());
+        lvLegendMidSquare.setItems(applicationViewModel.getGroupCountLegendMidSquareProperty());
+        lvLegendMidSquare.setCellFactory(legendItem -> new LegendCellFactory(lvLegendMidSquare, legendItem));
     }
 
     public void onBtnImport() {

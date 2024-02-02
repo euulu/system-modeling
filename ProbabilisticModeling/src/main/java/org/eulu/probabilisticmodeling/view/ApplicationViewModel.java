@@ -19,6 +19,9 @@ public class ApplicationViewModel {
     private final ObservableList<XYChart.Series<String, Integer>> groupCountStandard = FXCollections.observableArrayList();
     private final ObservableList<String> groupCountLegendStandard = FXCollections.observableArrayList();
     private final ObservableList<String> numbersStandard = FXCollections.observableArrayList();
+    private final ObservableList<XYChart.Series<String, Integer>> groupCountMidSquare = FXCollections.observableArrayList();
+    private final ObservableList<String> groupCountLegendMidSquare = FXCollections.observableArrayList();
+    private final ObservableList<String> numbersMidSquare = FXCollections.observableArrayList();
 
     public ApplicationViewModel(NumbersGenerator numbersGenerator) {
         this.numbersGenerator = numbersGenerator;
@@ -39,16 +42,30 @@ public class ApplicationViewModel {
         return generationCount;
     }
 
-    public ObservableList<String> getGroupCountLegendStandardProperty() {
-        return groupCountLegendStandard;
-    }
-
+    // Standard
     public ObservableList<XYChart.Series<String, Integer>> getGroupCountStandardProperty() {
         return groupCountStandard;
     }
 
+    public ObservableList<String> getGroupCountLegendStandardProperty() {
+        return groupCountLegendStandard;
+    }
+
     public ObservableList<String> getNumbersStandard() {
         return numbersStandard;
+    }
+
+    // Middle square
+    public ObservableList<XYChart.Series<String, Integer>> getGroupCountMidSquareProperty() {
+        return groupCountMidSquare;
+    }
+
+    public ObservableList<String> getGroupCountLegendMidSquareProperty() {
+        return groupCountLegendMidSquare;
+    }
+
+    public ObservableList<String> getNumbersMidSquare() {
+        return numbersMidSquare;
     }
 
     public void importFromExcel() {
@@ -64,19 +81,32 @@ public class ApplicationViewModel {
         int groupCountInt = Integer.parseInt(groupCount.getValue());
         int generationCountInt = Integer.parseInt(generationCount.getValue());
 
-        int[] numbers = numbersGenerator.generateNumbersStandard(
+        int[] numbersStandard = numbersGenerator.generateNumbersStandard(
                 upperBoundInt,
                 generationCountInt
         );
-        setNumbersStandard(numbers);
+        setNumbersStandard(numbersStandard);
 
-        int[] numbersInGroupsCount = numbersGenerator.countNumbersInGroups(
-                numbers,
+        int[] numbersInGroupsCountStandard = numbersGenerator.countNumbersInGroups(
+                numbersStandard,
                 upperBoundInt,
                 groupCountInt
         );
-        setGroupCountLegendStandard(numbersInGroupsCount);
-        setGroupCountStandard(numbersInGroupsCount);
+        setGroupCountLegendStandard(numbersInGroupsCountStandard);
+        setGroupCountStandard(numbersInGroupsCountStandard);
+
+        int[] numbersMidSquare = numbersGenerator.generateNumbersMidSquare(
+                upperBoundInt,
+                generationCountInt
+        );
+        setNumbersMidSquare(numbersMidSquare);
+        int[] numbersInGroupsCountMidSquare = numbersGenerator.countNumbersInGroups(
+                numbersStandard,
+                upperBoundInt,
+                groupCountInt
+        );
+        setGroupCountLegendMidSquare(numbersInGroupsCountMidSquare);
+        setGroupCountMidSquare(numbersInGroupsCountMidSquare);
     }
 
     private void setNumbersStandard(int[] numbers) {
@@ -93,8 +123,30 @@ public class ApplicationViewModel {
         }
     }
 
+    private void setNumbersMidSquare(int[] numbers) {
+        numbersMidSquare.clear();
+        for (int number : numbers) {
+            numbersMidSquare.add(String.valueOf(number));
+        }
+    }
+
+    private void setGroupCountLegendMidSquare(int[] numbersInGroupsCount) {
+        groupCountLegendMidSquare.clear();
+        for (int number : numbersInGroupsCount) {
+            groupCountLegendMidSquare.add(String.valueOf(number));
+        }
+    }
+
     private void setGroupCountStandard(int[] numbersCount) {
-        groupCountStandard.clear();
+        setGroupCount(numbersCount, groupCountStandard);
+    }
+
+    private void setGroupCountMidSquare(int[] numbersCount) {
+        setGroupCount(numbersCount, groupCountMidSquare);
+    }
+
+    private void setGroupCount(int[] numbersCount, ObservableList<XYChart.Series<String, Integer>> groupCountList) {
+        groupCountList.clear();
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
         for (int i = 0; i < numbersCount.length; i++) {
             XYChart.Data<String, Integer> data = new XYChart.Data<>(String.valueOf(i), numbersCount[i]);
@@ -110,6 +162,6 @@ public class ApplicationViewModel {
             });
             series.getData().add(data);
         }
-        groupCountStandard.add(series);
+        groupCountList.add(series);
     }
 }
