@@ -17,7 +17,7 @@ public class NumbersGeneratorModel implements NumbersGenerator {
     @Override
     public int[] generateNumbersMidSquare(int upperBound, int generationCount) {
         int[] generatedNumbers = new int[generationCount];
-        int seed = 1234;
+        int seed = ThreadLocalRandom.current().nextInt(1234, 9999);
         for (int i = 0; i < generationCount; i++) {
             String squaredSeed = String.format("%08d", (seed * seed));
             int randomNumber = Integer.parseInt(squaredSeed.substring(2, 6));
