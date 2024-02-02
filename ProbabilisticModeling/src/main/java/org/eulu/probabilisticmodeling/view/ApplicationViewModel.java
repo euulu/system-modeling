@@ -22,6 +22,9 @@ public class ApplicationViewModel {
     private final ObservableList<XYChart.Series<String, Integer>> groupCountMidSquare = FXCollections.observableArrayList();
     private final ObservableList<String> groupCountLegendMidSquare = FXCollections.observableArrayList();
     private final ObservableList<String> numbersMidSquare = FXCollections.observableArrayList();
+    private final ObservableList<XYChart.Series<String, Integer>> groupCountLinear = FXCollections.observableArrayList();
+    private final ObservableList<String> groupCountLegendLinear = FXCollections.observableArrayList();
+    private final ObservableList<String> numbersLinear = FXCollections.observableArrayList();
 
     public ApplicationViewModel(NumbersGenerator numbersGenerator) {
         this.numbersGenerator = numbersGenerator;
@@ -68,6 +71,19 @@ public class ApplicationViewModel {
         return numbersMidSquare;
     }
 
+    // Linear congruential
+    public ObservableList<XYChart.Series<String, Integer>> getGroupCountLinearProperty() {
+        return groupCountLinear;
+    }
+
+    public ObservableList<String> getGroupCountLegendLinearProperty() {
+        return groupCountLegendLinear;
+    }
+
+    public ObservableList<String> getNumbersLinear() {
+        return numbersLinear;
+    }
+
     public void importFromExcel() {
         System.out.println("ApplicationViewModel::excelImport");
     }
@@ -86,14 +102,13 @@ public class ApplicationViewModel {
                 generationCountInt
         );
         setNumbersStandard(numbersStandard);
-
         int[] numbersInGroupsCountStandard = numbersGenerator.countNumbersInGroups(
                 numbersStandard,
                 upperBoundInt,
                 groupCountInt
         );
         setGroupCountLegendStandard(numbersInGroupsCountStandard);
-        setGroupCountStandard(numbersInGroupsCountStandard);
+        setGroupCount(numbersInGroupsCountStandard, groupCountStandard);
 
         int[] numbersMidSquare = numbersGenerator.generateNumbersMidSquare(
                 upperBoundInt,
@@ -101,12 +116,25 @@ public class ApplicationViewModel {
         );
         setNumbersMidSquare(numbersMidSquare);
         int[] numbersInGroupsCountMidSquare = numbersGenerator.countNumbersInGroups(
-                numbersStandard,
+                numbersMidSquare,
                 upperBoundInt,
                 groupCountInt
         );
         setGroupCountLegendMidSquare(numbersInGroupsCountMidSquare);
-        setGroupCountMidSquare(numbersInGroupsCountMidSquare);
+        setGroupCount(numbersInGroupsCountMidSquare, groupCountMidSquare);
+
+        int[] numbersLinear = numbersGenerator.generateNumbersLinear(
+                upperBoundInt,
+                generationCountInt
+        );
+        setNumbersLinear(numbersLinear);
+        int[] numbersInGroupsCountLinear = numbersGenerator.countNumbersInGroups(
+                numbersLinear,
+                upperBoundInt,
+                groupCountInt
+        );
+        setGroupCountLegendLinear(numbersInGroupsCountLinear);
+        setGroupCount(numbersInGroupsCountLinear, groupCountLinear);
     }
 
     private void setNumbersStandard(int[] numbers) {
@@ -137,12 +165,18 @@ public class ApplicationViewModel {
         }
     }
 
-    private void setGroupCountStandard(int[] numbersCount) {
-        setGroupCount(numbersCount, groupCountStandard);
+    private void setNumbersLinear(int[] numbers) {
+        numbersLinear.clear();
+        for (int number : numbers) {
+            numbersLinear.add(String.valueOf(number));
+        }
     }
 
-    private void setGroupCountMidSquare(int[] numbersCount) {
-        setGroupCount(numbersCount, groupCountMidSquare);
+    private void setGroupCountLegendLinear(int[] numbersInGroupsCount) {
+        groupCountLegendLinear.clear();
+        for (int number : numbersInGroupsCount) {
+            groupCountLegendLinear.add(String.valueOf(number));
+        }
     }
 
     private void setGroupCount(int[] numbersCount, ObservableList<XYChart.Series<String, Integer>> groupCountList) {

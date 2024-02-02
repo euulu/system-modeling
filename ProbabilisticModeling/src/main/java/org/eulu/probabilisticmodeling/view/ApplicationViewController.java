@@ -23,14 +23,19 @@ public class ApplicationViewController {
     @FXML
     public BarChart<String, Integer> bcMidSquare;
     @FXML
+    public BarChart<String, Integer> bcLinear;
+    @FXML
     public MFXListView<String> lvLegendStandard;
     @FXML
     public MFXListView<String> lvLegendMidSquare;
     @FXML
+    public MFXListView<String> lvLegendLinear;
+    @FXML
     public MFXListView<String> lvGeneratedNumbersStandard;
     @FXML
     public MFXListView<String> lvGeneratedNumbersMidSquare;
-
+    @FXML
+    public MFXListView<String> lvGeneratedNumbersLinear;
 
     private ApplicationViewModel applicationViewModel;
 
@@ -50,6 +55,11 @@ public class ApplicationViewController {
         lvGeneratedNumbersMidSquare.setItems(applicationViewModel.getNumbersMidSquare());
         lvLegendMidSquare.setItems(applicationViewModel.getGroupCountLegendMidSquareProperty());
         lvLegendMidSquare.setCellFactory(legendItem -> new LegendCellFactory(lvLegendMidSquare, legendItem));
+        // Linear congruential method
+        bcLinear.setData(applicationViewModel.getGroupCountLinearProperty());
+        lvGeneratedNumbersLinear.setItems(applicationViewModel.getNumbersLinear());
+        lvLegendLinear.setItems(applicationViewModel.getGroupCountLegendLinearProperty());
+        lvLegendLinear.setCellFactory(legendItem -> new LegendCellFactory(lvLegendLinear, legendItem));
     }
 
     public void onBtnImport() {
