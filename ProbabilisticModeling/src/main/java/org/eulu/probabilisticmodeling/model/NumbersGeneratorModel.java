@@ -29,6 +29,20 @@ public class NumbersGeneratorModel implements NumbersGenerator {
     }
 
     @Override
+    public int[] generateNumbersLinear(int upperBound, int generationCount) {
+        int[] randomNumbers = new int[generationCount];
+        int seed = ThreadLocalRandom.current().nextInt(1, upperBound + 1);
+        int k = 3;
+        int c = 5;
+        for (int i = 0; i < generationCount; i++) {
+            randomNumbers[i] = (k * seed + c) % upperBound;
+            seed = randomNumbers[i];
+        }
+
+        return randomNumbers;
+    }
+
+    @Override
     public int[] countNumbersInGroups(int[] numbers, int upperBound, int groupCount) {
         int[] counter = new int[groupCount];
         int chunkSize = upperBound / groupCount;

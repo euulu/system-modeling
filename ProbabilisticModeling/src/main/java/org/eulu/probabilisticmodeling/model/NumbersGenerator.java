@@ -5,5 +5,7 @@ public interface NumbersGenerator {
 
     int[] generateNumbersMidSquare(int upperBound, int generationCount);
 
+    int[] generateNumbersLinear(int upperBound, int generationCount);
+
     int[] countNumbersInGroups(int[] numbers, int upperBound, int groupCount);
 }
