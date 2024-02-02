@@ -97,85 +97,57 @@ public class ApplicationViewModel {
         int groupCountInt = Integer.parseInt(groupCount.getValue());
         int generationCountInt = Integer.parseInt(generationCount.getValue());
 
-        int[] numbersStandard = numbersGenerator.generateNumbersStandard(
+        int[] calculatedNumbersStandard = numbersGenerator.generateNumbersStandard(
                 upperBoundInt,
                 generationCountInt
         );
-        setNumbersStandard(numbersStandard);
+        setNumbers(calculatedNumbersStandard, numbersStandard);
         int[] numbersInGroupsCountStandard = numbersGenerator.countNumbersInGroups(
-                numbersStandard,
+                calculatedNumbersStandard,
                 upperBoundInt,
                 groupCountInt
         );
-        setGroupCountLegendStandard(numbersInGroupsCountStandard);
+        setGroupCountLegend(numbersInGroupsCountStandard, groupCountLegendStandard);
         setGroupCount(numbersInGroupsCountStandard, groupCountStandard);
 
-        int[] numbersMidSquare = numbersGenerator.generateNumbersMidSquare(
+        int[] calculatedNumbersMidSquare = numbersGenerator.generateNumbersMidSquare(
                 upperBoundInt,
                 generationCountInt
         );
-        setNumbersMidSquare(numbersMidSquare);
+        setNumbers(calculatedNumbersMidSquare, numbersMidSquare);
         int[] numbersInGroupsCountMidSquare = numbersGenerator.countNumbersInGroups(
-                numbersMidSquare,
+                calculatedNumbersMidSquare,
                 upperBoundInt,
                 groupCountInt
         );
-        setGroupCountLegendMidSquare(numbersInGroupsCountMidSquare);
+        setGroupCountLegend(numbersInGroupsCountMidSquare, groupCountLegendMidSquare);
         setGroupCount(numbersInGroupsCountMidSquare, groupCountMidSquare);
 
-        int[] numbersLinear = numbersGenerator.generateNumbersLinear(
+        int[] calculatedNumbersLinear = numbersGenerator.generateNumbersLinear(
                 upperBoundInt,
                 generationCountInt
         );
-        setNumbersLinear(numbersLinear);
+        setNumbers(calculatedNumbersLinear, numbersLinear);
         int[] numbersInGroupsCountLinear = numbersGenerator.countNumbersInGroups(
-                numbersLinear,
+                calculatedNumbersLinear,
                 upperBoundInt,
                 groupCountInt
         );
-        setGroupCountLegendLinear(numbersInGroupsCountLinear);
+        setGroupCountLegend(numbersInGroupsCountLinear, groupCountLegendLinear);
         setGroupCount(numbersInGroupsCountLinear, groupCountLinear);
     }
 
-    private void setNumbersStandard(int[] numbers) {
-        numbersStandard.clear();
+    private void setNumbers(int[] numbers, ObservableList<String> numbersList) {
+        numbersList.clear();
         for (int number : numbers) {
-            numbersStandard.add(String.valueOf(number));
+            numbersList.add(String.valueOf(number));
         }
     }
 
-    private void setGroupCountLegendStandard(int[] numbersInGroupsCount) {
-        groupCountLegendStandard.clear();
+    private void setGroupCountLegend(int[] numbersInGroupsCount, ObservableList<String> groupCountList) {
+        groupCountList.clear();
         for (int number : numbersInGroupsCount) {
-            groupCountLegendStandard.add(String.valueOf(number));
-        }
-    }
-
-    private void setNumbersMidSquare(int[] numbers) {
-        numbersMidSquare.clear();
-        for (int number : numbers) {
-            numbersMidSquare.add(String.valueOf(number));
-        }
-    }
-
-    private void setGroupCountLegendMidSquare(int[] numbersInGroupsCount) {
-        groupCountLegendMidSquare.clear();
-        for (int number : numbersInGroupsCount) {
-            groupCountLegendMidSquare.add(String.valueOf(number));
-        }
-    }
-
-    private void setNumbersLinear(int[] numbers) {
-        numbersLinear.clear();
-        for (int number : numbers) {
-            numbersLinear.add(String.valueOf(number));
-        }
-    }
-
-    private void setGroupCountLegendLinear(int[] numbersInGroupsCount) {
-        groupCountLegendLinear.clear();
-        for (int number : numbersInGroupsCount) {
-            groupCountLegendLinear.add(String.valueOf(number));
+            groupCountList.add(String.valueOf(number));
         }
     }
 
