@@ -49,9 +49,27 @@
             <Insets bottom="20.0" />
          </VBox.margin></MFXTextField>
         <Pane VBox.vgrow="ALWAYS" />
-        <MFXButton onAction="#onBtnImport" prefWidth="Infinity" text="Імпортувати з Excel" />
-        <MFXButton onAction="#onBtnExport" prefWidth="Infinity" text="Експортувати в Excel" />
-        <MFXButton onAction="#onBtnGenerateData" prefWidth="Infinity" text="Згенерувати" />
+        <MFXButton buttonType="RAISED" onAction="#onBtnImport" prefWidth="Infinity" text="Імпортувати з Excel" textFill="WHITE">
+         <VBox.margin>
+            <Insets bottom="16.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding></MFXButton>
+        <MFXButton buttonType="RAISED" onAction="#onBtnExport" prefWidth="Infinity" text="Експортувати в Excel" textFill="WHITE">
+         <VBox.margin>
+            <Insets bottom="16.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding></MFXButton>
+        <MFXButton buttonType="RAISED" onAction="#onBtnGenerateData" prefWidth="Infinity" text="Згенерувати" textFill="WHITE">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding></MFXButton>
       <padding>
          <Insets bottom="20.0" left="12.0" right="12.0" top="20.0" />
       </padding>

@@ -35,3 +35,7 @@
 .mfx-text-field:focus-within .floating-text {
     -fx-text-fill: rgb(140, 87, 255);
 }
+
+.mfx-button {
+    -fx-background-color: rgb(140, 87, 255);
+}
