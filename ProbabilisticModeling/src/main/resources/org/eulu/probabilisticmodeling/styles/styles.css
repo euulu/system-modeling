@@ -13,6 +13,18 @@
     -fx-effect: dropshadow(gaussian, rgba(46, 38, 61, 0.2), 10, 0.1, 0, 0);
 }
 
+.bar-chart .chart-content .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.default-color0.chart-bar {
+    -fx-bar-fill: rgb(140, 87, 255);
+}
+
+.generated-numbers-list.mfx-list-view .virtual-flow .mfx-list-cell {
+    -fx-alignment: center;
+}
+
 .mfx-text-field {
     -mfx-main: rgb(140, 87, 255);
     -fx-background-color: transparent;
