@@ -26,7 +26,7 @@ public class ViewHandler {
             FXMLLoader fxmlLoader = new FXMLLoader(
                     ProbabilisticModelingApplication.class.getResource("application-view.fxml")
             );
-            Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
+            Scene scene = new Scene(fxmlLoader.load(), 1024, 650);
             ApplicationViewController applicationViewController = fxmlLoader.getController();
             applicationViewController.init(viewModelFactory.getApplicationViewModel());
             stage.setTitle("Імовірнісне моделювання(Луцюк Є.В. - ЛР№2)");
