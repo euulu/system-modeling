@@ -50,16 +50,22 @@ public class ApplicationViewController {
         lvLegendStandard.setItems(applicationViewModel.getGroupCountLegendStandardProperty());
         lvLegendStandard.setCellFactory(legendItem -> new LegendCellFactory(lvLegendStandard, legendItem));
         lvGeneratedNumbersStandard.setItems(applicationViewModel.getNumbersStandard());
+        lvGeneratedNumbersStandard.setCellFactory(generatedNumber ->
+                new GeneratedNumbersCellFactory(lvGeneratedNumbersStandard, generatedNumber));
         // Middle square method
         bcMidSquare.setData(applicationViewModel.getGroupCountMidSquareProperty());
-        lvGeneratedNumbersMidSquare.setItems(applicationViewModel.getNumbersMidSquare());
         lvLegendMidSquare.setItems(applicationViewModel.getGroupCountLegendMidSquareProperty());
         lvLegendMidSquare.setCellFactory(legendItem -> new LegendCellFactory(lvLegendMidSquare, legendItem));
+        lvGeneratedNumbersMidSquare.setItems(applicationViewModel.getNumbersMidSquare());
+        lvGeneratedNumbersMidSquare.setCellFactory(generatedNumber ->
+                new GeneratedNumbersCellFactory(lvGeneratedNumbersMidSquare, generatedNumber));
         // Linear congruential method
         bcLinear.setData(applicationViewModel.getGroupCountLinearProperty());
-        lvGeneratedNumbersLinear.setItems(applicationViewModel.getNumbersLinear());
         lvLegendLinear.setItems(applicationViewModel.getGroupCountLegendLinearProperty());
         lvLegendLinear.setCellFactory(legendItem -> new LegendCellFactory(lvLegendLinear, legendItem));
+        lvGeneratedNumbersLinear.setItems(applicationViewModel.getNumbersLinear());
+        lvGeneratedNumbersLinear.setCellFactory(generatedNumber ->
+                new GeneratedNumbersCellFactory(lvGeneratedNumbersLinear, generatedNumber));
     }
 
     public void onBtnImport() {
@@ -88,6 +94,19 @@ public class ApplicationViewController {
             super.render(data);
             setPrefHeight(24.0);
             if (squareIcon != null) getChildren().addFirst(squareIcon);
+        }
+    }
+
+    private static class GeneratedNumbersCellFactory extends MFXListCell<String> {
+        public GeneratedNumbersCellFactory(MFXListView<String> listView, String data) {
+            super(listView, data);
+            render(data);
+        }
+
+        @Override
+        protected void render(String data) {
+            super.render(data);
+            setPrefHeight(24.0);
         }
     }
 }
