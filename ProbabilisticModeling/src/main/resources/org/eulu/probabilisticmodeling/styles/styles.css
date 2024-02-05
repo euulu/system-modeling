@@ -6,6 +6,13 @@
     -fx-background-color: #28243D;
 }
 
+.tile-box {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(46, 38, 61, 0.2), 10, 0.1, 0, 0);
+}
+
 .mfx-text-field {
     -mfx-main: rgb(140, 87, 255);
     -fx-background-color: transparent;
