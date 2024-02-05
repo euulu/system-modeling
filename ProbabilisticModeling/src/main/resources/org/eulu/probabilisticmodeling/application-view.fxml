@@ -16,124 +16,157 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="gpWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="800.0" prefHeight="650.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eulu.probabilisticmodeling.view.ApplicationViewController">
+<GridPane fx:id="gpWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="800.0"
+          prefHeight="650.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="org.eulu.probabilisticmodeling.view.ApplicationViewController">
     <columnConstraints>
-        <ColumnConstraints hgrow="ALWAYS" minWidth="400.0" percentWidth="75.0" />
-        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="150.0" percentWidth="25.0" />
+        <ColumnConstraints hgrow="ALWAYS" minWidth="400.0" percentWidth="75.0"/>
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="150.0" percentWidth="25.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="500.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="500.0" vgrow="ALWAYS"/>
     </rowConstraints>
-    <VBox prefHeight="200.0" prefWidth="100.0" styleClass="sidebar-bg" stylesheets="@styles/styles.css" GridPane.columnIndex="1">
-        <MFXTextField fx:id="tfUpperBound" borderGap="12.0" floatMode="BORDER" floatingText="Верхня межа генерації" floatingTextGap="8.0" prefWidth="Infinity" stylesheets="@styles/styles.css">
-         <VBox.margin>
-            <Insets bottom="4.0" />
-         </VBox.margin></MFXTextField>
-      <Label text="Інтервал від 0 до верхньої межі" textFill="#e7e3fab2">
-         <VBox.margin>
-            <Insets bottom="20.0" />
-         </VBox.margin>
-         <font>
-            <Font size="10.0" />
-         </font>
-         <padding>
-            <Insets left="13.0" />
-         </padding>
-      </Label>
-        <MFXTextField fx:id="tfGroupCount" borderGap="12.0" floatMode="BORDER" floatingText="Кількість проміжків" floatingTextGap="8.0" prefWidth="Infinity">
-         <VBox.margin>
-            <Insets bottom="20.0" />
-         </VBox.margin></MFXTextField>
-        <MFXTextField fx:id="tfGenerationCount" borderGap="12.0" floatMode="BORDER" floatingText="Кількість випробувань" floatingTextGap="8.0" prefWidth="Infinity">
-         <VBox.margin>
-            <Insets bottom="20.0" />
-         </VBox.margin></MFXTextField>
-        <Pane VBox.vgrow="ALWAYS" />
-        <MFXButton buttonType="RAISED" onAction="#onBtnImport" prefWidth="Infinity" text="Імпортувати з Excel" textFill="WHITE">
-         <VBox.margin>
-            <Insets bottom="16.0" />
-         </VBox.margin>
-         <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-         </padding></MFXButton>
-        <MFXButton buttonType="RAISED" onAction="#onBtnExport" prefWidth="Infinity" text="Експортувати в Excel" textFill="WHITE">
-         <VBox.margin>
-            <Insets bottom="16.0" />
-         </VBox.margin>
-         <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-         </padding></MFXButton>
-        <MFXButton buttonType="RAISED" onAction="#onBtnGenerateData" prefWidth="Infinity" text="Згенерувати" textFill="WHITE">
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-         <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-         </padding></MFXButton>
-      <padding>
-         <Insets bottom="20.0" left="12.0" right="12.0" top="20.0" />
-      </padding>
+    <VBox prefHeight="200.0" prefWidth="100.0" styleClass="sidebar-bg" stylesheets="@styles/styles.css"
+          GridPane.columnIndex="1">
+        <MFXTextField fx:id="tfUpperBound" borderGap="12.0" floatMode="BORDER" floatingText="Верхня межа генерації"
+                      floatingTextGap="8.0" prefWidth="Infinity" stylesheets="@styles/styles.css">
+            <VBox.margin>
+                <Insets bottom="4.0"/>
+            </VBox.margin>
+        </MFXTextField>
+        <Label text="Інтервал від 0 до верхньої межі" textFill="#e7e3fab2">
+            <VBox.margin>
+                <Insets bottom="20.0"/>
+            </VBox.margin>
+            <font>
+                <Font size="10.0"/>
+            </font>
+            <padding>
+                <Insets left="13.0"/>
+            </padding>
+        </Label>
+        <MFXTextField fx:id="tfGroupCount" borderGap="12.0" floatMode="BORDER" floatingText="Кількість проміжків"
+                      floatingTextGap="8.0" prefWidth="Infinity">
+            <VBox.margin>
+                <Insets bottom="20.0"/>
+            </VBox.margin>
+        </MFXTextField>
+        <MFXTextField fx:id="tfGenerationCount" borderGap="12.0" floatMode="BORDER" floatingText="Кількість випробувань"
+                      floatingTextGap="8.0" prefWidth="Infinity">
+            <VBox.margin>
+                <Insets bottom="20.0"/>
+            </VBox.margin>
+        </MFXTextField>
+        <Pane VBox.vgrow="ALWAYS"/>
+        <MFXButton buttonType="RAISED" onAction="#onBtnImport" prefWidth="Infinity" text="Імпортувати з Excel"
+                   textFill="WHITE">
+            <VBox.margin>
+                <Insets bottom="16.0"/>
+            </VBox.margin>
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+            </padding>
+        </MFXButton>
+        <MFXButton buttonType="RAISED" onAction="#onBtnExport" prefWidth="Infinity" text="Експортувати в Excel"
+                   textFill="WHITE">
+            <VBox.margin>
+                <Insets bottom="16.0"/>
+            </VBox.margin>
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+            </padding>
+        </MFXButton>
+        <MFXButton buttonType="RAISED" onAction="#onBtnGenerateData" prefWidth="Infinity" text="Згенерувати"
+                   textFill="WHITE">
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+            </padding>
+        </MFXButton>
+        <padding>
+            <Insets bottom="20.0" left="12.0" right="12.0" top="20.0"/>
+        </padding>
     </VBox>
     <VBox styleClass="main-bg" stylesheets="@styles/styles.css" GridPane.hgrow="ALWAYS">
-        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-            <BarChart fx:id="bcStandard" animated="false" HBox.hgrow="ALWAYS">
-                <xAxis>
-                    <CategoryAxis side="BOTTOM" />
-                </xAxis>
-                <yAxis>
-                    <NumberAxis side="LEFT" />
-                </yAxis>
-            </BarChart>
-            <MFXListView fx:id="lvLegendStandard">
-                <GridPane.margin>
-                </GridPane.margin>
-            </MFXListView>
-            <MFXListView fx:id="lvGeneratedNumbersStandard">
-                <GridPane.margin>
-                </GridPane.margin>
-            </MFXListView>
-        </HBox>
-        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-            <BarChart fx:id="bcMidSquare" animated="false" HBox.hgrow="ALWAYS">
-                <xAxis>
-                    <CategoryAxis side="BOTTOM" />
-                </xAxis>
-                <yAxis>
-                    <NumberAxis side="LEFT" />
-                </yAxis>
-            </BarChart>
-            <MFXListView fx:id="lvLegendMidSquare">
-                <GridPane.margin>
-                </GridPane.margin>
-            </MFXListView>
-            <MFXListView fx:id="lvGeneratedNumbersMidSquare">
-                <GridPane.margin>
-                </GridPane.margin>
-            </MFXListView>
-        </HBox>
-        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-            <BarChart fx:id="bcLinear" animated="false" HBox.hgrow="ALWAYS">
-                <xAxis>
-                    <CategoryAxis side="BOTTOM" />
-                </xAxis>
-                <yAxis>
-                    <NumberAxis side="LEFT" />
-                </yAxis>
-            </BarChart>
-            <MFXListView fx:id="lvLegendLinear">
-                <GridPane.margin>
-                </GridPane.margin>
-            </MFXListView>
-            <MFXListView fx:id="lvGeneratedNumbersLinear">
-                <GridPane.margin>
-                </GridPane.margin>
-            </MFXListView>
-        </HBox>
-      <padding>
-         <Insets bottom="20.0" left="12.0" right="20.0" top="20.0" />
-      </padding>
+        <VBox VBox.vgrow="ALWAYS">
+            <Label text="Label"/>
+            <HBox VBox.vgrow="ALWAYS">
+                <BarChart fx:id="bcStandard" animated="false" HBox.hgrow="ALWAYS">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT"/>
+                    </yAxis>
+                </BarChart>
+                <MFXListView fx:id="lvLegendStandard">
+                    <GridPane.margin>
+                    </GridPane.margin>
+                    <HBox.margin>
+                        <Insets top="16.0"/>
+                    </HBox.margin>
+                </MFXListView>
+                <VBox>
+                    <Label text="Label"/>
+                    <MFXListView fx:id="lvGeneratedNumbersStandard"/>
+                </VBox>
+            </HBox>
+        </VBox>
+        <VBox VBox.vgrow="ALWAYS">
+            <Label text="Label"/>
+            <HBox VBox.vgrow="ALWAYS">
+                <BarChart fx:id="bcMidSquare" animated="false" HBox.hgrow="ALWAYS">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT"/>
+                    </yAxis>
+                </BarChart>
+                <MFXListView fx:id="lvLegendMidSquare">
+                    <GridPane.margin>
+                    </GridPane.margin>
+                    <HBox.margin>
+                        <Insets top="16.0"/>
+                    </HBox.margin>
+                </MFXListView>
+                <VBox>
+                    <Label text="Label"/>
+                    <MFXListView fx:id="lvGeneratedNumbersMidSquare"/>
+                </VBox>
+            </HBox>
+        </VBox>
+        <VBox VBox.vgrow="ALWAYS">
+            <Label text="Label"/>
+            <HBox VBox.vgrow="ALWAYS">
+                <BarChart fx:id="bcLinear" animated="false" HBox.hgrow="ALWAYS">
+                    <xAxis>
+                        <CategoryAxis side="BOTTOM"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT"/>
+                    </yAxis>
+                </BarChart>
+                <MFXListView fx:id="lvLegendLinear">
+                    <GridPane.margin>
+                    </GridPane.margin>
+                    <HBox.margin>
+                        <Insets top="16.0"/>
+                    </HBox.margin>
+                </MFXListView>
+                <VBox>
+                    <Label text="Label"/>
+                    <MFXListView fx:id="lvGeneratedNumbersLinear"/>
+                </VBox>
+            </HBox>
+        </VBox>
+        <padding>
+            <Insets bottom="20.0" left="12.0" right="20.0" top="20.0"/>
+        </padding>
     </VBox>
-   <opaqueInsets>
-      <Insets />
-   </opaqueInsets>
+    <opaqueInsets>
+        <Insets/>
+    </opaqueInsets>
 </GridPane>
