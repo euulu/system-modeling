@@ -1,5 +1,7 @@
 package org.eulu.probabilisticmodeling.view;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -9,13 +11,21 @@ import javafx.geometry.Pos;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.eulu.probabilisticmodeling.model.NumbersGenerator;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class ApplicationViewModel {
     private final NumbersGenerator numbersGenerator;
     private final StringProperty upperBound;
     private final StringProperty groupCount;
     private final StringProperty generationCount;
+    private final BooleanProperty canExportToExcel;
     private final ObservableList<XYChart.Series<String, Integer>> groupCountStandard = FXCollections.observableArrayList();
     private final ObservableList<String> groupCountLegendStandard = FXCollections.observableArrayList();
     private final ObservableList<String> numbersStandard = FXCollections.observableArrayList();
@@ -31,6 +41,7 @@ public class ApplicationViewModel {
         this.upperBound = new SimpleStringProperty();
         this.groupCount = new SimpleStringProperty();
         this.generationCount = new SimpleStringProperty();
+        this.canExportToExcel = new SimpleBooleanProperty(false);
     }
 
     public StringProperty upperBoundProperty() {
@@ -43,6 +54,10 @@ public class ApplicationViewModel {
 
     public StringProperty generationCountProperty() {
         return generationCount;
+    }
+
+    public BooleanProperty canExportToExcelProperty() {
+        return canExportToExcel;
     }
 
     // Standard
@@ -88,15 +103,27 @@ public class ApplicationViewModel {
         System.out.println("ApplicationViewModel::excelImport");
     }
 
-    public int exportToExcel() {
-        if (numbersStandard.isEmpty() || numbersMidSquare.isEmpty() || numbersLinear.isEmpty()) {
-            // TODO: Show dialog to generate data
-            return -1;
-        } else {
-            // TODO: Export data
-            return 0;
-        }
+    public void exportToExcel() throws IOException {
+        try (XSSFWorkbook workbook = new XSSFWorkbook()) {
+            XSSFSheet sheet = workbook.createSheet("Sheet1");
+            int[] array1 = {1, 2, 3, 4, 5};
+            int[] array2 = {6, 7, 8, 9, 10};
 
+            int rowIndex = 0;
+            XSSFRow row;
+            XSSFCell cell;
+            for (int i = 0; i < array1.length; i++) {
+                row = sheet.createRow(rowIndex++);
+                cell = row.createCell(0);
+                cell.setCellValue(array1[i]);
+
+                cell = row.createCell(1);
+                cell.setCellValue(array2[i]);
+            }
+            try (FileOutputStream outputStream = new FileOutputStream("output.xlsx")) {
+                workbook.write(outputStream);
+            }
+        }
     }
 
     public void generateData() {
@@ -142,6 +169,7 @@ public class ApplicationViewModel {
         );
         setGroupCountLegend(numbersInGroupsCountLinear, groupCountLegendLinear);
         setGroupCount(numbersInGroupsCountLinear, groupCountLinear);
+        canExportToExcel.set(true);
     }
 
     private void setNumbers(int[] numbers, ObservableList<String> numbersList) {

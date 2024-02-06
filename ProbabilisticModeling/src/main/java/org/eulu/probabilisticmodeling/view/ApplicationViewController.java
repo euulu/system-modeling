@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import org.eulu.probabilisticmodeling.view.cellfactory.GeneratedNumbersCellFactory;
 import org.eulu.probabilisticmodeling.view.cellfactory.LegendCellFactory;
 
+import java.io.IOException;
 import java.util.Map;
 
 import static org.eulu.probabilisticmodeling.util.Constants.*;
@@ -114,8 +115,16 @@ public class ApplicationViewController {
     }
 
     public void onBtnExport() {
-        if (applicationViewModel.exportToExcel() == -1) {
+        if (!applicationViewModel.canExportToExcelProperty().get()) {
             exportDialog.showDialog();
+        } else {
+            try {
+                applicationViewModel.exportToExcel();
+            } catch (IOException e) {
+                exportDialogContent.setHeaderText(EXPORT_FILE_ERROR_TITLE);
+                exportDialogContent.setContentText(EXPORT_FILE_ERROR_MESSAGE);
+                exportDialog.showDialog();
+            }
         }
     }
 
