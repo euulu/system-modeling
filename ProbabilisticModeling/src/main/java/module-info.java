@@ -3,6 +3,7 @@ module org.eulu.probabilisticmodeling {
     requires javafx.fxml;
     requires MaterialFX;
     requires VirtualizedFX;
+    requires org.apache.poi.ooxml;
 
     opens org.eulu.probabilisticmodeling to javafx.fxml;
     exports org.eulu.probabilisticmodeling;
