@@ -28,7 +28,7 @@ public class ViewHandler {
             );
             Scene scene = new Scene(fxmlLoader.load());
             ApplicationViewController applicationViewController = fxmlLoader.getController();
-            applicationViewController.init(viewModelFactory.getApplicationViewModel());
+            applicationViewController.init(viewModelFactory.getApplicationViewModel(), stage);
             stage.setTitle("Імовірнісне моделювання(Луцюк Є.В. - ЛР№2)");
             stage.setScene(scene);
             stage.show();

@@ -88,8 +88,15 @@ public class ApplicationViewModel {
         System.out.println("ApplicationViewModel::excelImport");
     }
 
-    public void exportToExcel() {
-        System.out.println("ApplicationViewModel::exportToExcel");
+    public int exportToExcel() {
+        if (numbersStandard.isEmpty() || numbersMidSquare.isEmpty() || numbersLinear.isEmpty()) {
+            // TODO: Show dialog to generate data
+            return -1;
+        } else {
+            // TODO: Export data
+            return 0;
+        }
+
     }
 
     public void generateData() {

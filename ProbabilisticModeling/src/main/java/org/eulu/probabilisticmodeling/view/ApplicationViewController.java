@@ -1,13 +1,25 @@
 package org.eulu.probabilisticmodeling.view;
 
+import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXListView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.cell.MFXListCell;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
+import io.github.palexdev.materialfx.dialogs.MFXGenericDialogBuilder;
+import io.github.palexdev.materialfx.dialogs.MFXStageDialog;
+import io.github.palexdev.materialfx.enums.ScrimPriority;
 import io.github.palexdev.mfxresources.fonts.MFXFontIcon;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.util.Map;
+
+import static org.eulu.probabilisticmodeling.util.Constants.*;
 
 public class ApplicationViewController {
     @FXML
@@ -38,8 +50,11 @@ public class ApplicationViewController {
     public MFXListView<String> lvGeneratedNumbersLinear;
 
     private ApplicationViewModel applicationViewModel;
+    private MFXGenericDialog exportDialogContent;
+    private MFXStageDialog exportDialog;
+    MFXFontIcon errorIcon = new MFXFontIcon("fas-circle-exclamation", 18);
 
-    public void init(ApplicationViewModel applicationViewModel) {
+    public void init(ApplicationViewModel applicationViewModel, Stage stage) {
         this.applicationViewModel = applicationViewModel;
         tfUpperBound.textProperty().bindBidirectional(applicationViewModel.upperBoundProperty());
         tfGroupCount.textProperty().bindBidirectional(applicationViewModel.groupCountProperty());
@@ -66,6 +81,32 @@ public class ApplicationViewController {
         lvGeneratedNumbersLinear.setItems(applicationViewModel.getNumbersLinear());
         lvGeneratedNumbersLinear.setCellFactory(generatedNumber ->
                 new GeneratedNumbersCellFactory(lvGeneratedNumbersLinear, generatedNumber));
+
+        Platform.runLater(() -> {
+            this.exportDialogContent = MFXGenericDialogBuilder.build()
+                    .setHeaderText(EXPORT_ERROR_TITLE)
+                    .setContentText(EXPORT_ERROR_MESSAGE)
+                    .setHeaderIcon(errorIcon)
+                    .makeScrollable(true)
+                    .setShowClose(false)
+                    .setShowMinimize(false)
+                    .setShowAlwaysOnTop(false)
+                    .get();
+            this.exportDialog = MFXGenericDialogBuilder.build(exportDialogContent)
+                    .toStageDialogBuilder()
+                    .initOwner(stage)
+                    .initModality(Modality.APPLICATION_MODAL)
+                    .setOwnerNode(gpWrapper)
+                    .setScrimPriority(ScrimPriority.WINDOW)
+                    .setScrimOwner(true)
+                    .get();
+
+            exportDialogContent.addActions(
+                    Map.entry(new MFXButton(EXPORT_ERROR_BTN_OK), event -> exportDialog.close())
+            );
+            exportDialogContent.getStyleClass().add("mfx-error-dialog");
+            exportDialogContent.setMaxSize(400, 200);
+        });
     }
 
     public void onBtnImport() {
@@ -73,7 +114,9 @@ public class ApplicationViewController {
     }
 
     public void onBtnExport() {
-        applicationViewModel.exportToExcel();
+        if (applicationViewModel.exportToExcel() == -1) {
+            exportDialog.showDialog();
+        }
     }
 
     public void onBtnGenerateData() {
