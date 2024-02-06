@@ -3,7 +3,6 @@ package org.eulu.probabilisticmodeling.view;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXListView;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import io.github.palexdev.materialfx.controls.cell.MFXListCell;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialog;
 import io.github.palexdev.materialfx.dialogs.MFXGenericDialogBuilder;
 import io.github.palexdev.materialfx.dialogs.MFXStageDialog;
@@ -13,9 +12,10 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.eulu.probabilisticmodeling.view.cellfactory.GeneratedNumbersCellFactory;
+import org.eulu.probabilisticmodeling.view.cellfactory.LegendCellFactory;
 
 import java.util.Map;
 
@@ -81,7 +81,7 @@ public class ApplicationViewController {
         lvGeneratedNumbersLinear.setItems(applicationViewModel.getNumbersLinear());
         lvGeneratedNumbersLinear.setCellFactory(generatedNumber ->
                 new GeneratedNumbersCellFactory(lvGeneratedNumbersLinear, generatedNumber));
-
+        // Initialize export data dialog error
         Platform.runLater(() -> {
             this.exportDialogContent = MFXGenericDialogBuilder.build()
                     .setHeaderText(EXPORT_ERROR_TITLE)
@@ -121,35 +121,5 @@ public class ApplicationViewController {
 
     public void onBtnGenerateData() {
         applicationViewModel.generateData();
-    }
-
-    private static class LegendCellFactory extends MFXListCell<String> {
-        private final MFXFontIcon squareIcon;
-
-        public LegendCellFactory(MFXListView<String> listView, String data) {
-            super(listView, data);
-            squareIcon = new MFXFontIcon("fas-square", 12, Color.web("8c57ff"));
-            render(data);
-        }
-
-        @Override
-        protected void render(String data) {
-            super.render(data);
-            setPrefHeight(24.0);
-            if (squareIcon != null) getChildren().addFirst(squareIcon);
-        }
-    }
-
-    private static class GeneratedNumbersCellFactory extends MFXListCell<String> {
-        public GeneratedNumbersCellFactory(MFXListView<String> listView, String data) {
-            super(listView, data);
-            render(data);
-        }
-
-        @Override
-        protected void render(String data) {
-            super.render(data);
-            setPrefHeight(24.0);
-        }
     }
 }
