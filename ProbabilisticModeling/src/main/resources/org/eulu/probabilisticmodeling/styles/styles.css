@@ -1,0 +1,60 @@
+.main-bg {
+    -fx-background-color: #F4F5FA;
+}
+
+.sidebar-bg {
+    -fx-background-color: #28243D;
+}
+
+.tile-box {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(46, 38, 61, 0.2), 10, 0.1, 0, 0);
+}
+
+.bar-chart .chart-content .chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.default-color0.chart-bar {
+    -fx-bar-fill: rgb(140, 87, 255);
+}
+
+.generated-numbers-list.mfx-list-view .virtual-flow .mfx-list-cell {
+    -fx-alignment: center;
+}
+
+.mfx-text-field {
+    -mfx-main: rgb(140, 87, 255);
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(231, 227, 252, 0.22);
+    -fx-border-width: 1px;
+    -fx-padding: 8 12;
+    -fx-text-fill: rgba(231, 227, 252, 0.9);
+}
+
+.mfx-text-field:hover {
+    -fx-border-color: rgba(231, 227, 252, 0.6);
+}
+
+.mfx-text-field:focus-within {
+    -fx-border-color: rgb(140, 87, 255);
+}
+
+.mfx-text-field .text-field {
+    -fx-highlight-fill: rgb(140, 87, 255); /* Selected text highlight */
+}
+
+.mfx-text-field .floating-text {
+    -fx-background-color: #28243D;
+    -fx-text-fill: rgba(231, 227, 252, 0.7);
+}
+
+.mfx-text-field:focus-within .floating-text {
+    -fx-text-fill: rgb(140, 87, 255);
+}
+
+.mfx-button {
+    -fx-background-color: rgb(140, 87, 255);
+}
