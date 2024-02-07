@@ -1,13 +1,13 @@
 package org.eulu.probabilisticmodeling.model;
 
 import javafx.collections.ObservableList;
-import javafx.stage.Window;
 
+import java.io.File;
 import java.io.IOException;
 
 public interface DataIOManager {
     void exportToFile(
-            Window window,
+            File file,
             ObservableList<String> groupCountLegendStandard,
             ObservableList<String> numbersStandard,
             ObservableList<String> groupCountLegendMidSquare,

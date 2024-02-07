@@ -12,11 +12,13 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.eulu.probabilisticmodeling.view.cellfactory.GeneratedNumbersCellFactory;
 import org.eulu.probabilisticmodeling.view.cellfactory.LegendCellFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -119,7 +121,13 @@ public class ApplicationViewController {
             exportDialog.showDialog();
         } else {
             try {
-                applicationViewModel.exportToExcel(gpWrapper.getScene().getWindow());
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Зберегти згенеровані дані");
+                fileChooser.setInitialFileName("Імовірнісне моделювання.xlsx");
+                File file = fileChooser.showSaveDialog(gpWrapper.getScene().getWindow());
+                if (file != null) {
+                    applicationViewModel.exportToExcel(file);
+                }
             } catch (IOException e) {
                 exportDialogContent.setHeaderText(EXPORT_FILE_ERROR_TITLE);
                 exportDialogContent.setContentText(EXPORT_FILE_ERROR_MESSAGE);

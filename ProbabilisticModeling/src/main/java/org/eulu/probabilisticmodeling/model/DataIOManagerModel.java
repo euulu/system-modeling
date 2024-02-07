@@ -1,8 +1,6 @@
 package org.eulu.probabilisticmodeling.model;
 
 import javafx.collections.ObservableList;
-import javafx.stage.FileChooser;
-import javafx.stage.Window;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -16,7 +14,7 @@ public class DataIOManagerModel implements DataIOManager {
 
     @Override
     public void exportToFile(
-            Window window,
+            File file,
             ObservableList<String> groupCountLegendStandard,
             ObservableList<String> numbersStandard,
             ObservableList<String> groupCountLegendMidSquare,
@@ -43,14 +41,8 @@ public class DataIOManagerModel implements DataIOManager {
                 setCellValues(groupCountLegendLinear, groupCountLegendLinearRow, i);
             }
 
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Зберегти згенеровані дані");
-            fileChooser.setInitialFileName("Імовірнісне моделювання.xlsx");
-            File file = fileChooser.showSaveDialog(window);
-            if (file != null) {
-                try (FileOutputStream outputStream = new FileOutputStream(file.getAbsolutePath())) {
-                    workbook.write(outputStream);
-                }
+            try (FileOutputStream outputStream = new FileOutputStream(file.getAbsolutePath())) {
+                workbook.write(outputStream);
             }
         }
     }

@@ -11,10 +11,10 @@ import javafx.geometry.Pos;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Window;
 import org.eulu.probabilisticmodeling.model.DataIOManager;
 import org.eulu.probabilisticmodeling.model.NumbersGenerator;
 
+import java.io.File;
 import java.io.IOException;
 
 public class ApplicationViewModel {
@@ -102,9 +102,9 @@ public class ApplicationViewModel {
         System.out.println("ApplicationViewModel::excelImport");
     }
 
-    public void exportToExcel(Window window) throws IOException {
+    public void exportToExcel(File file) throws IOException {
         dataIOManager.exportToFile(
-                window,
+                file,
                 groupCountLegendStandard,
                 numbersStandard,
                 groupCountLegendMidSquare,
