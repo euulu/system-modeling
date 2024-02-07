@@ -10,6 +10,9 @@ public class ViewModelFactory {
     }
 
     public ApplicationViewModel getApplicationViewModel() {
-        return new ApplicationViewModel(modelFactory.getNumbersGeneratorModel());
+        return new ApplicationViewModel(
+                modelFactory.getNumbersGeneratorModel(),
+                modelFactory.getDataIOManagerModel()
+        );
     }
 }

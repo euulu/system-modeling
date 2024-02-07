@@ -119,7 +119,7 @@ public class ApplicationViewController {
             exportDialog.showDialog();
         } else {
             try {
-                applicationViewModel.exportToExcel();
+                applicationViewModel.exportToExcel(gpWrapper.getScene().getWindow());
             } catch (IOException e) {
                 exportDialogContent.setHeaderText(EXPORT_FILE_ERROR_TITLE);
                 exportDialogContent.setContentText(EXPORT_FILE_ERROR_MESSAGE);

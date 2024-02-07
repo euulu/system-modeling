@@ -11,17 +11,15 @@ import javafx.geometry.Pos;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import javafx.stage.Window;
+import org.eulu.probabilisticmodeling.model.DataIOManager;
 import org.eulu.probabilisticmodeling.model.NumbersGenerator;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class ApplicationViewModel {
     private final NumbersGenerator numbersGenerator;
+    private final DataIOManager dataIOManager;
     private final StringProperty upperBound;
     private final StringProperty groupCount;
     private final StringProperty generationCount;
@@ -36,8 +34,9 @@ public class ApplicationViewModel {
     private final ObservableList<String> groupCountLegendLinear = FXCollections.observableArrayList();
     private final ObservableList<String> numbersLinear = FXCollections.observableArrayList();
 
-    public ApplicationViewModel(NumbersGenerator numbersGenerator) {
+    public ApplicationViewModel(NumbersGenerator numbersGenerator, DataIOManager dataIOManager) {
         this.numbersGenerator = numbersGenerator;
+        this.dataIOManager = dataIOManager;
         this.upperBound = new SimpleStringProperty();
         this.groupCount = new SimpleStringProperty();
         this.generationCount = new SimpleStringProperty();
@@ -103,27 +102,16 @@ public class ApplicationViewModel {
         System.out.println("ApplicationViewModel::excelImport");
     }
 
-    public void exportToExcel() throws IOException {
-        try (XSSFWorkbook workbook = new XSSFWorkbook()) {
-            XSSFSheet sheet = workbook.createSheet("Sheet1");
-            int[] array1 = {1, 2, 3, 4, 5};
-            int[] array2 = {6, 7, 8, 9, 10};
-
-            int rowIndex = 0;
-            XSSFRow row;
-            XSSFCell cell;
-            for (int i = 0; i < array1.length; i++) {
-                row = sheet.createRow(rowIndex++);
-                cell = row.createCell(0);
-                cell.setCellValue(array1[i]);
-
-                cell = row.createCell(1);
-                cell.setCellValue(array2[i]);
-            }
-            try (FileOutputStream outputStream = new FileOutputStream("output.xlsx")) {
-                workbook.write(outputStream);
-            }
-        }
+    public void exportToExcel(Window window) throws IOException {
+        dataIOManager.exportToFile(
+                window,
+                groupCountLegendStandard,
+                numbersStandard,
+                groupCountLegendMidSquare,
+                numbersMidSquare,
+                groupCountLegendLinear,
+                numbersLinear
+        );
     }
 
     public void generateData() {
