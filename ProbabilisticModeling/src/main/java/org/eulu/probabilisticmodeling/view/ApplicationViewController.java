@@ -113,7 +113,25 @@ public class ApplicationViewController {
     }
 
     public void onBtnImport() {
-        applicationViewModel.importFromExcel();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Завантажити дані з файлу");
+        fileChooser
+                .getExtensionFilters()
+                .add(new FileChooser.ExtensionFilter("Excel files(*.xls, *.xlsx)", "*.xls", "*.xlsx"));
+        File file = fileChooser.showOpenDialog(gpWrapper.getScene().getWindow());
+        if (file != null) {
+            try {
+                applicationViewModel.importFromExcel(file);
+            } catch (NumberFormatException e) {
+                exportDialogContent.setHeaderText(IMPORT_FILE_ERROR_TITLE);
+                exportDialogContent.setContentText(IMPORT_FILE_PARSE_ERROR_MESSAGE);
+                exportDialog.showDialog();
+            } catch (IOException e) {
+                exportDialogContent.setHeaderText(IMPORT_FILE_ERROR_TITLE);
+                exportDialogContent.setContentText(IMPORT_FILE_NOT_FOUND_ERROR_MESSAGE);
+                exportDialog.showDialog();
+            }
+        }
     }
 
     public void onBtnExport() {
@@ -129,7 +147,7 @@ public class ApplicationViewController {
                     applicationViewModel.exportToExcel(file);
                 }
             } catch (IOException e) {
-                exportDialogContent.setHeaderText(EXPORT_FILE_ERROR_TITLE);
+                exportDialogContent.setHeaderText(EXPORT_ERROR_TITLE);
                 exportDialogContent.setContentText(EXPORT_FILE_ERROR_MESSAGE);
                 exportDialog.showDialog();
             }

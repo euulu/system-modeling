@@ -16,6 +16,7 @@ import org.eulu.probabilisticmodeling.model.NumbersGenerator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class ApplicationViewModel {
     private final NumbersGenerator numbersGenerator;
@@ -98,8 +99,17 @@ public class ApplicationViewModel {
         return numbersLinear;
     }
 
-    public void importFromExcel() {
-        System.out.println("ApplicationViewModel::excelImport");
+    public void importFromExcel(File file) throws IOException {
+        List<int[]> excelData = dataIOManager.importFromExcel(file);
+        setNumbers(excelData.get(0), numbersStandard);
+        setGroupCountLegend(excelData.get(1), groupCountLegendStandard);
+        setGroupCount(excelData.get(1), groupCountStandard);
+        setNumbers(excelData.get(2), numbersMidSquare);
+        setGroupCountLegend(excelData.get(3), groupCountLegendMidSquare);
+        setGroupCount(excelData.get(3), groupCountMidSquare);
+        setNumbers(excelData.get(4), numbersLinear);
+        setGroupCountLegend(excelData.get(5), groupCountLegendLinear);
+        setGroupCount(excelData.get(5), groupCountLinear);
     }
 
     public void exportToExcel(File file) throws IOException {
