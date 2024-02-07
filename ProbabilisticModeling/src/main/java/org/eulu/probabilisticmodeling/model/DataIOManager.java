@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public interface DataIOManager {
     void exportToFile(
@@ -15,4 +16,6 @@ public interface DataIOManager {
             ObservableList<String> groupCountLegendLinear,
             ObservableList<String> numbersLinear
     ) throws IOException;
+
+    List<int[]> importFromExcel(File file) throws IOException;
 }

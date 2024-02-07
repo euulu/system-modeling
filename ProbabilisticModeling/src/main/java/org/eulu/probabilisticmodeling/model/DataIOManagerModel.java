@@ -1,14 +1,15 @@
 package org.eulu.probabilisticmodeling.model;
 
 import javafx.collections.ObservableList;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataIOManagerModel implements DataIOManager {
 
@@ -45,6 +46,36 @@ public class DataIOManagerModel implements DataIOManager {
                 workbook.write(outputStream);
             }
         }
+    }
+
+    @Override
+    public List<int[]> importFromExcel(File file) throws IOException {
+        List<int[]> excelData = new ArrayList<>();
+
+        try (FileInputStream inputStream = new FileInputStream(file)) {
+            Workbook workbook = WorkbookFactory.create(inputStream);
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for (Row row : sheet) {
+                int[] rowData = new int[row.getLastCellNum()];
+                int cellIndex = 0;
+                for (Cell cell : row) {
+                    if (cell.getCellType() == CellType.NUMERIC) {
+                        rowData[cellIndex] = (int) cell.getNumericCellValue();
+                    } else if (cell.getCellType() == CellType.STRING) {
+                        try {
+                            rowData[cellIndex] = Integer.parseInt(cell.getStringCellValue());
+                        } catch (NumberFormatException e) {
+                            throw new NumberFormatException();
+                        }
+                    }
+                    cellIndex++;
+                }
+                excelData.add(rowData);
+            }
+        }
+
+        return excelData;
     }
 
     private void setCellValues(ObservableList<String> data, XSSFRow row, int index) {
