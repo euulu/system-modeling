@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.eulu</groupId>
-    <artifactId>PredatorPray</artifactId>
+    <artifactId>PredatorPrey</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>PredatorPray</name>
 
@@ -66,7 +66,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.eulu.predatorpray/org.eulu.predatorpray.Application</mainClass>
+                            <mainClass>org.eulu.predatorpray/org.eulu.predatorprey.Application</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

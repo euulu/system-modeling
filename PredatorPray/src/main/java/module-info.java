@@ -4,6 +4,6 @@ module org.eulu.predatorpray {
     requires MaterialFX;
     requires VirtualizedFX;
 
-    exports org.eulu.predatorpray;
-    opens org.eulu.predatorpray to javafx.fxml;
+    exports org.eulu.predatorprey;
+    opens org.eulu.predatorprey to javafx.fxml;
 }

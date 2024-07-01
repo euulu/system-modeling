@@ -1,4 +1,4 @@
-package org.eulu.predatorpray;
+package org.eulu.predatorprey;
 
 import io.github.palexdev.materialfx.theming.JavaFXThemes;
 import io.github.palexdev.materialfx.theming.MaterialFXStylesheets;
