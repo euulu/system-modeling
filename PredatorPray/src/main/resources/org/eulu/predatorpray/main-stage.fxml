@@ -26,17 +26,7 @@
             <Insets bottom="16.0" left="12.0" right="12.0" top="16.0" />
         </padding>
         <children>
-         <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-            <children>
-                    <GridPane fx:id="gpEcosystem" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="572.0" prefWidth="572.0" StackPane.alignment="CENTER">
-                  <columnConstraints>
-                     <ColumnConstraints />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints />
-                  </rowConstraints>
-               </GridPane>
-            </children>
+         <StackPane fx:id="spEcosystem" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
             <VBox.margin>
                <Insets bottom="20.0" />
             </VBox.margin>
