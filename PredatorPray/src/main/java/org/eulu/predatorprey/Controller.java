@@ -23,7 +23,11 @@ public class Controller {
     @FXML
     public MFXTextField tfPreyCount;
     @FXML
+    public MFXTextField tfPreyReproductionAge;
+    @FXML
     public MFXTextField tfPredatorCount;
+    @FXML
+    public MFXTextField tfPredatorReproductionAge;
 
     public void onBtnStart() {
         Canvas canvas = new Canvas(MIN_SIZE, MIN_SIZE);
@@ -65,13 +69,15 @@ public class Controller {
             gc.strokeLine(0, i * cellSize, canvas.getWidth(), i * cellSize);
         }
 
-        fillRandomCells(gc, preyCount, Color.BLUE, cellSize);
-        fillRandomCells(gc, predatorCount, Color.RED, cellSize);
+        fillRandomCells(AnimalType.PREY, gc, preyCount, cellSize);
+        fillRandomCells(AnimalType.PREDATOR, gc, predatorCount, cellSize);
     }
 
-    private void fillRandomCells(GraphicsContext gc, int numCells, Color color, double cellSize) {
+    private void fillRandomCells(AnimalType animalType, GraphicsContext gc, int numCells, double cellSize) {
         int numColumns = Integer.parseInt(tfXSize.getText());
         int numRows = Integer.parseInt(tfYSize.getText());
+        int preyReproductionAge = Integer.parseInt(tfPreyReproductionAge.getText());
+        int predatorReproductionAge = Integer.parseInt(tfPredatorReproductionAge.getText());
         Set<String> occupiedCells = new HashSet<>();
         Random random = new Random();
 
@@ -80,19 +86,28 @@ public class Controller {
             int row = random.nextInt(numRows);
             String cellKey = col + "," + row;
 
+
             if (!occupiedCells.contains(cellKey)) {
-                colorCell(gc, col, row, color, cellSize);
+                Animal animal;
+                if (animalType == AnimalType.PREY) {
+                    animal = new Prey(col, row, preyReproductionAge);
+                    colorCell(gc, animal, cellSize);
+                }
+                if (animalType == AnimalType.PREDATOR) {
+                    animal = new Predator(col, row, predatorReproductionAge);
+                    colorCell(gc, animal, cellSize);
+                }
                 occupiedCells.add(cellKey);
                 numCells--;
             }
         }
     }
 
-    private void colorCell(GraphicsContext gc, int col, int row, Color color, double cellSize) {
-        double x = col * cellSize;
-        double y = row * cellSize;
+    private void colorCell(GraphicsContext gc, Animal animal, double cellSize) {
+        double x = animal.getX() * cellSize;
+        double y = animal.getY() * cellSize;
 
-        gc.setFill(color);
+        gc.setFill(animal.getColor());
         gc.fillRect(x, y, cellSize, cellSize);
     }
 }
