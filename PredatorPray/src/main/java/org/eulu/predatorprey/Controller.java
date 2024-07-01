@@ -29,7 +29,7 @@ public class Controller {
     @FXML
     public MFXTextField tfPredatorReproductionAge;
 
-    public void onBtnStart() {
+    public void onBtnCreateWorld() {
         Canvas canvas = new Canvas(MIN_SIZE, MIN_SIZE);
         spEcosystem.getChildren().add(canvas);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -109,5 +109,9 @@ public class Controller {
 
         gc.setFill(animal.getColor());
         gc.fillRect(x, y, cellSize, cellSize);
+    }
+
+    public void onBtnStart() {
+
     }
 }
