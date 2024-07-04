@@ -67,47 +67,47 @@
         </children>
     </VBox>
     <VBox styleClass="sidebar-bg" stylesheets="@styles/styles.css" GridPane.columnIndex="1">
-        <MFXTextField fx:id="tfXSize" borderGap="12.0" floatMode="BORDER" floatingText="Розмір сітки по X" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" stylesheets="@styles/styles.css">
+        <MFXTextField fx:id="tfXSize" borderGap="12.0" floatMode="BORDER" floatingText="Розмір сітки по X" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" stylesheets="@styles/styles.css" text="60">
             <VBox.margin>
                 <Insets bottom="12.0" />
             </VBox.margin>
         </MFXTextField>
-        <MFXTextField fx:id="tfYSize" borderGap="12.0" floatMode="BORDER" floatingText="Розмір сітки по Y" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field">
+        <MFXTextField fx:id="tfYSize" borderGap="12.0" floatMode="BORDER" floatingText="Розмір сітки по Y" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="60">
             <VBox.margin>
                 <Insets bottom="12.0" />
             </VBox.margin>
         </MFXTextField>
-        <MFXTextField fx:id="tfPreyCount" borderGap="12.0" floatMode="BORDER" floatingText="Кількість жертв" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field">
+        <MFXTextField fx:id="tfPreyCount" borderGap="12.0" floatMode="BORDER" floatingText="Кількість жертв" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="100">
             <VBox.margin>
                 <Insets bottom="12.0" />
             </VBox.margin>
         </MFXTextField>
-        <MFXTextField fx:id="tfPreyReproductionAge" borderGap="12.0" floatMode="BORDER" floatingText="Початковий вік розмноження жертв" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field">
+        <MFXTextField fx:id="tfPreyReproductionAge" borderGap="12.0" floatMode="BORDER" floatingText="Початковий вік розмноження жертв" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="2">
             <VBox.margin>
                 <Insets bottom="12.0" />
             </VBox.margin>
         </MFXTextField>
-        <MFXTextField fx:id="tfPreyReproductionPeriod" borderGap="12.0" floatMode="BORDER" floatingText="Період розмоноження жертв" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field">
+        <MFXTextField fx:id="tfPreyReproductionPeriod" borderGap="12.0" floatMode="BORDER" floatingText="Період розмоноження жертв" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="2">
             <VBox.margin>
                 <Insets bottom="12.0" />
             </VBox.margin>
         </MFXTextField>
-        <MFXTextField fx:id="tfPredatorCount" borderGap="12.0" floatMode="BORDER" floatingText="Кількість хижаків" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field">
+        <MFXTextField fx:id="tfPredatorCount" borderGap="12.0" floatMode="BORDER" floatingText="Кількість хижаків" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="30">
             <VBox.margin>
                 <Insets bottom="12.0" />
             </VBox.margin>
         </MFXTextField>
-        <MFXTextField fx:id="tfPredatorReproductionAge" borderGap="12.0" floatMode="BORDER" floatingText="Початковий вік розмноження хижаків" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field">
+        <MFXTextField fx:id="tfPredatorReproductionAge" borderGap="12.0" floatMode="BORDER" floatingText="Початковий вік розмноження хижаків" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="5">
             <VBox.margin>
                 <Insets bottom="12.0" />
             </VBox.margin>
         </MFXTextField>
-        <MFXTextField fx:id="tfPredatorReproductionPeriod" borderGap="12.0" floatMode="BORDER" floatingText="Період розмоноження хижаків" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field">
+        <MFXTextField fx:id="tfPredatorReproductionPeriod" borderGap="12.0" floatMode="BORDER" floatingText="Період розмоноження хижаків" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="4">
             <VBox.margin>
                 <Insets bottom="12.0" />
             </VBox.margin>
         </MFXTextField>
-        <MFXTextField fx:id="tfPredatorNoFoodPeriod" borderGap="12.0" floatMode="BORDER" floatingText="Життя хижака без їжі" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field">
+        <MFXTextField fx:id="tfPredatorNoFoodPeriod" borderGap="12.0" floatMode="BORDER" floatingText="Життя хижака без їжі" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="2">
             <VBox.margin>
                 <Insets bottom="12.0" />
             </VBox.margin>
