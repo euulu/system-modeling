@@ -2,16 +2,20 @@ package org.eulu.predatorprey;
 
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.ResourceBundle;
 import java.util.Set;
 
-public class Controller {
+public class Controller implements Initializable {
     private static final int MIN_SIZE = 572;
 
     @FXML
@@ -25,9 +29,36 @@ public class Controller {
     @FXML
     public MFXTextField tfPreyReproductionAge;
     @FXML
+    public MFXTextField tfPreyReproductionPeriod;
+    @FXML
     public MFXTextField tfPredatorCount;
     @FXML
     public MFXTextField tfPredatorReproductionAge;
+    @FXML
+    public MFXTextField tfPredatorReproductionPeriod;
+    @FXML
+    public MFXTextField tfPredatorNoFoodPeriod;
+    @FXML
+    public Label lblTextFieldError;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.initValidator(tfXSize, lblTextFieldError);
+        this.initValidator(tfYSize, lblTextFieldError);
+        this.initValidator(tfPreyCount, lblTextFieldError);
+        this.initValidator(tfPreyReproductionAge, lblTextFieldError);
+        this.initValidator(tfPreyReproductionPeriod, lblTextFieldError);
+        this.initValidator(tfPredatorCount, lblTextFieldError);
+        this.initValidator(tfPredatorReproductionAge, lblTextFieldError);
+        this.initValidator(tfPredatorReproductionPeriod, lblTextFieldError);
+        this.initValidator(tfPredatorNoFoodPeriod, lblTextFieldError);
+    }
+
+    private void initValidator(MFXTextField field, Label label) {
+        TextFieldValidator digitFieldValidator = new TextFieldValidator(field, label);
+        digitFieldValidator.validate();
+    }
 
     public void onBtnCreateWorld() {
         Canvas canvas = new Canvas(MIN_SIZE, MIN_SIZE);
@@ -113,5 +144,16 @@ public class Controller {
 
     public void onBtnStart() {
 
+    }
+
+    public void onBtnStep() {
+        int numColumns = Integer.parseInt(tfXSize.getText());
+        int numRows = Integer.parseInt(tfYSize.getText());
+
+        for (int x = 0; x < numColumns; x++) {
+            for (int y = 0; y < numRows; y++) {
+                System.out.println("qwe");
+            }
+        }
     }
 }

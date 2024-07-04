@@ -46,3 +46,24 @@
 .mfx-button {
     -fx-background-color: rgb(140, 87, 255);
 }
+
+.validated-field {
+    -mfx-hide-character: '?';
+}
+
+.validated-field:invalid {
+    -fx-border-color: -mfx-red;
+}
+
+.validated-field:invalid .floating-text {
+    -fx-text-fill: -mfx-red;
+}
+
+.validated-field:invalid .mfx-font-icon {
+    -mfx-color: -mfx-red;
+}
+
+.validation-label {
+    -fx-font-family: 'Visby Round CF Demi Bold';
+    -fx-font-size: 11;
+}
