@@ -61,8 +61,20 @@ public class Simulation {
         for (int y = 0; y < this.ySize; y++) {
             for (int x = 0; x < this.xSize; x++) {
                 switch (this.board[x][y]) {
-                    case Prey prey -> g.setFill(prey.getColor());
-                    case Predator predator -> g.setFill(predator.getColor());
+                    case Prey prey -> {
+                        if (prey.getAge() <= prey.getReproductionAge()) {
+                            g.setFill(prey.getYangColor());
+                        } else {
+                            g.setFill(prey.getOldColor());
+                        }
+                    }
+                    case Predator predator -> {
+                        if (predator.getAge() <= predator.getReproductionAge()) {
+                            g.setFill(predator.getYangColor());
+                        } else {
+                            g.setFill(predator.getOldColor());
+                        }
+                    }
                     case null, default -> g.setFill(Color.LIGHTGRAY);
                 }
                 g.fillRect(x * this.cellSize, y * this.cellSize, this.cellSize, this.cellSize);
@@ -113,7 +125,7 @@ public class Simulation {
         double x = animal.getX() * this.cellSize;
         double y = animal.getY() * this.cellSize;
 
-        g.setFill(animal.getColor());
+        g.setFill(animal.getYangColor());
         g.fillRect(x, y, this.cellSize, this.cellSize);
     }
 
@@ -131,6 +143,7 @@ public class Simulation {
         }
 
         for (Animal animal : animalsToMove) {
+            animal.incrementAge();
             int x = animal.getX();
             int y = animal.getY();
 

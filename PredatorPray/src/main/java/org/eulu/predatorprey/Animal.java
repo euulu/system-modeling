@@ -7,7 +7,8 @@ import java.util.Random;
 public class Animal {
     private int x;
     private int y;
-    private Color color;
+    private Color yangColor;
+    private Color oldColor;
     private int age;
     private int reproductionAge;
 
@@ -51,11 +52,23 @@ public class Animal {
         this.reproductionAge = reproductionAge;
     }
 
-    public Color getColor() {
-        return color;
+    public void incrementAge() {
+        this.age++;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public Color getYangColor() {
+        return yangColor;
+    }
+
+    public void setYangColor(Color yangColor) {
+        this.yangColor = yangColor;
+    }
+
+    public Color getOldColor() {
+        return oldColor;
+    }
+
+    public void setOldColor(Color oldColor) {
+        this.oldColor = oldColor;
     }
 }
