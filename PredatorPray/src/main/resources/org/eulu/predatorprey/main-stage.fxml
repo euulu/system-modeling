@@ -119,7 +119,7 @@
         </VBox.margin></Label>
 
         <Pane VBox.vgrow="ALWAYS" />
-        <MFXButton buttonType="RAISED" onAction="#onBtnCreateWorld" prefWidth="Infinity" text="Створити симуляцію" textFill="WHITE">
+        <MFXButton buttonType="RAISED" onAction="#onBtnCreateBoard" prefWidth="Infinity" text="Створити симуляцію" textFill="WHITE">
             <VBox.margin>
                 <Insets bottom="16.0" />
             </VBox.margin>

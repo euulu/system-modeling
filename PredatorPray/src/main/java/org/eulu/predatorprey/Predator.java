@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 import java.util.Random;
 
-public class Predator extends Animal{
+public class Predator extends Animal {
 //    #ff200c
 //    ff795b
     public Predator(int x, int y, int reproductionAge) {
