@@ -5,9 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 import static org.eulu.predatorprey.Constants.DIRECTIONS;
 import static org.eulu.predatorprey.Constants.MIN_SIZE;
@@ -42,7 +40,6 @@ public class Simulation {
             this.parent.getChildren().clear();
         }
         this.parent.getChildren().add(this.canvas);
-        GraphicsContext g = this.canvas.getGraphicsContext2D();
 
         if (this.xSize > this.ySize) {
             this.canvas.setWidth(MIN_SIZE);
@@ -121,30 +118,44 @@ public class Simulation {
     }
 
     public void runEpoch() {
+        List<Animal> animalsToMove = new ArrayList<>();
         Animal[][] newBoard = new Animal[xSize][ySize];
+        Random random = new Random();
 
         for (int y = 0; y < this.ySize; y++) {
             for (int x = 0; x < this.xSize; x++) {
                 if (this.board[x][y] != null) {
-                    Animal currAnimal = this.board[x][y];
-                    int currAge = currAnimal.getAge();
-                    currAnimal.setAge(currAge + 1);
-                }
-
-                for (int[] direction : DIRECTIONS) {
-                    int newX = (x + direction[0] + xSize) % xSize;
-                    int newY = (y + direction[1] + ySize) % ySize;
-                    if (this.board[newX][newY] == null) {
-                        // TODO: find random null cell to move to.
-                        newBoard[newX][newY] = this.board[x][y];
-                        break;
-                    }
+                    animalsToMove.add(this.board[x][y]);
                 }
             }
         }
 
-        this.board = newBoard;
+        for (Animal animal : animalsToMove) {
+            int x = animal.getX();
+            int y = animal.getY();
 
+            List<int[]> emptyCells = new ArrayList<>();
+            for (int[] direction : DIRECTIONS) {
+                int newX = (x + direction[0] + xSize) % xSize;
+                int newY = (y + direction[1] + ySize) % ySize;
+                if (newBoard[newX][newY] == null) {
+                    emptyCells.add(new int[]{newX, newY});
+                }
+            }
+
+            if (!emptyCells.isEmpty()) {
+                int newPosition = random.nextInt(emptyCells.size());
+                int newX = emptyCells.get(newPosition)[0];
+                int newY = emptyCells.get(newPosition)[1];
+                newBoard[newX][newY] = animal;
+                animal.setX(newX);
+                animal.setY(newY);
+            } else {
+                newBoard[x][y] = animal;
+            }
+        }
+
+        this.board = newBoard;
         drawBoard();
     }
 }
