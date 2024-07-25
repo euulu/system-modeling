@@ -124,8 +124,8 @@ public class Simulation {
     public void runEpoch() {
         this.epochNumber++;
         this.tempBoard = new boolean[this.xSize][this.ySize];
-        movePreys();
-        movePredators();
+        this.movePreys();
+        this.movePredators();
         this.drawAnimalsOnBoard();
     }
 
@@ -134,7 +134,7 @@ public class Simulation {
         Collections.shuffle(preysList);
 
         for (Prey prey : preysList) {
-            moveToEmpty(prey);
+            this.moveToEmpty(prey);
         }
     }
 
@@ -143,7 +143,7 @@ public class Simulation {
         Collections.shuffle(predatorsList);
 
         for (Predator predator : predatorsList) {
-            moveToEmpty(predator);
+            this.moveToEat(predator);
         }
     }
 
@@ -161,6 +161,23 @@ public class Simulation {
             this.tempBoard[newCoordinates[0]][newCoordinates[1]] = true;
         } else {
             this.tempBoard[oldX][oldY] = true;
+        }
+    }
+
+    private void moveToEat(Predator predator) {
+        int oldX = predator.getX();
+        int oldY = predator.getY();
+        List<int[]> preyNeighbors = getNeighborsToEat(oldX, oldY);
+
+        if (!preyNeighbors.isEmpty()) {
+            int[] preyCoordinates = preyNeighbors.get(new Random().nextInt(preyNeighbors.size()));
+            this.board[oldX][oldY] = null;
+            predator.setX(preyCoordinates[0]);
+            predator.setY(preyCoordinates[1]);
+            this.board[preyCoordinates[0]][preyCoordinates[1]] = predator;
+            this.tempBoard[preyCoordinates[0]][preyCoordinates[1]] = true;
+        } else {
+            this.moveToEmpty(predator);
         }
     }
 
@@ -190,5 +207,19 @@ public class Simulation {
         }
 
         return emptyNeighbors;
+    }
+
+    private List<int[]> getNeighborsToEat(int x, int y) {
+        List<int[]> preyNeighbors = new ArrayList<>();
+
+        for (int[] dir : DIRECTIONS) {
+            int newX = (x + dir[0] + this.xSize) % this.xSize;
+            int newY = (y + dir[1] + this.ySize) % this.ySize;
+            if (this.board[newX][newY] instanceof Prey && this.tempBoard[newX][newY]) {
+                preyNeighbors.add(new int[]{newX, newY});
+            }
+        }
+
+        return preyNeighbors;
     }
 }
