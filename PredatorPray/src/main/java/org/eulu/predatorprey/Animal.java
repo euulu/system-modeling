@@ -43,16 +43,8 @@ public abstract class Animal {
         return age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public int getReproductionAge() {
         return reproductionAge;
-    }
-
-    public void setReproductionAge(int reproductionAge) {
-        this.reproductionAge = reproductionAge;
     }
 
     public void incrementAge() {
@@ -73,14 +65,6 @@ public abstract class Animal {
 
     public void setOldColor(Color oldColor) {
         this.oldColor = oldColor;
-    }
-
-    public int getReproductionPeriod() {
-        return reproductionPeriod;
-    }
-
-    public void setReproductionPeriod(int reproductionPeriod) {
-        this.reproductionPeriod = reproductionPeriod;
     }
 
     public boolean canReproduce() {
