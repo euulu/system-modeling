@@ -58,15 +58,18 @@ public class Controller implements Initializable {
         int ySize = Integer.parseInt(tfYSize.getText());
         int preyCount = Integer.parseInt(tfPreyCount.getText());
         int preyReproductionAge = Integer.parseInt(tfPreyReproductionAge.getText());
+        int preyReproductionPeriod = Integer.parseInt(tfPreyReproductionPeriod.getText());
         int predatorCount = Integer.parseInt(tfPredatorCount.getText());
         int predatorReproductionAge = Integer.parseInt(tfPredatorReproductionAge.getText());
+        int predatorReproductionPeriod = Integer.parseInt(tfPredatorReproductionPeriod.getText());
+        int predatorNoFoodPeriod = Integer.parseInt(tfPredatorNoFoodPeriod.getText());
 
-        simulation = new Simulation(spEcosystem, xSize, ySize, preyCount, preyReproductionAge, predatorCount, predatorReproductionAge);
+        simulation = new Simulation(spEcosystem, xSize, ySize, preyCount, preyReproductionAge, preyReproductionPeriod, predatorCount, predatorReproductionAge, predatorReproductionPeriod, predatorNoFoodPeriod);
         simulation.initializeCanvas();
     }
 
     public void onBtnStep() {
-        simulation.runEpoch();
+//        simulation.runEpoch();
     }
 
     public void onBtnStart() {
