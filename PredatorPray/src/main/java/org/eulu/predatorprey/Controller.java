@@ -69,7 +69,7 @@ public class Controller implements Initializable {
     }
 
     public void onBtnStep() {
-//        simulation.runEpoch();
+        simulation.runEpoch();
     }
 
     public void onBtnStart() {
