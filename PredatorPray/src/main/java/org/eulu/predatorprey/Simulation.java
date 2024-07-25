@@ -26,7 +26,7 @@ public class Simulation {
     private final int predatorReproductionAge;
     private final int predatorReproductionPeriod;
     private final int predatorNoFoodPeriod;
-    private Animal[][] board;
+    private final Animal[][] board;
     private boolean[][] tempBoard;
     private int epochNumber;
 
@@ -129,6 +129,7 @@ public class Simulation {
         this.tempBoard = new boolean[this.xSize][this.ySize];
         this.movePreys();
         this.movePredators();
+        this.reproduce();
         this.removeDead();
         this.drawAnimalsOnBoard();
     }
@@ -227,6 +228,33 @@ public class Simulation {
         }
 
         return preyNeighbors;
+    }
+
+    private void reproduce() {
+        List<Animal> newborns = new ArrayList<>();
+
+        for (int y = 0; y < this.ySize; y++) {
+            for (int x = 0; x < this.xSize; x++) {
+                if (this.board[x][y] != null) {
+                    Animal animal = this.board[x][y];
+                    animal.incrementAge();
+                    if (animal.canReproduce()) {
+                        Animal newborn = animal.reproduce();
+                        if (newborn != null) {
+                            newborns.add(newborn);
+                        }
+                    }
+                }
+            }
+        }
+
+        for (Animal newborn : newborns) {
+            List<int[]> emptyNeighbors = getEmptyNeighbors(newborn.getX(), newborn.getY());
+            if (!emptyNeighbors.isEmpty()) {
+                int[] newPos = emptyNeighbors.get(new Random().nextInt(emptyNeighbors.size()));
+                this.board[newPos[0]][newPos[1]] = newborn;
+            }
+        }
     }
 
     private void removeDead() {

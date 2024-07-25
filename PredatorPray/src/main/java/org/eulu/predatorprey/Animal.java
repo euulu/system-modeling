@@ -4,12 +4,13 @@ import javafx.scene.paint.Color;
 
 import java.util.Random;
 
-public class Animal {
+public abstract class Animal {
     private int x;
     private int y;
-    private int age;
-    private int reproductionAge;
-    private int reproductionPeriod;
+    protected int age;
+    protected int reproductionAge;
+    protected int reproductionPeriod;
+    protected int lastReproduction;
     private Color yangColor;
     private Color oldColor;
 
@@ -81,4 +82,10 @@ public class Animal {
     public void setReproductionPeriod(int reproductionPeriod) {
         this.reproductionPeriod = reproductionPeriod;
     }
+
+    public boolean canReproduce() {
+        return (this.age >= this.reproductionAge) && ((this.age - this.lastReproduction) >= this.reproductionPeriod);
+    }
+
+    public abstract Animal reproduce();
 }

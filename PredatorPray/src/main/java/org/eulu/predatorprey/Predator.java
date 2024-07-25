@@ -25,4 +25,10 @@ public class Predator extends Animal {
     public boolean isDead() {
         return this.hunger >= this.predatorNoFoodPeriod;
     }
+
+    @Override
+    public Animal reproduce() {
+        this.lastReproduction = this.age;
+        return new Predator(this.getX(), this.getY(), this.reproductionAge, this.reproductionPeriod, this.predatorNoFoodPeriod);
+    }
 }

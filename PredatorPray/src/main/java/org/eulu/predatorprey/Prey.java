@@ -9,4 +9,10 @@ public class Prey extends Animal {
         this.setYangColor(Color.web("#60b9ff"));
         this.setOldColor(Color.web("#007add"));
     }
+
+    @Override
+    public Animal reproduce() {
+        this.lastReproduction = this.age;
+        return new Prey(this.getX(), this.getY(), this.reproductionAge, this.reproductionPeriod);
+    }
 }
