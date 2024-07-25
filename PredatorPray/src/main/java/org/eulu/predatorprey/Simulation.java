@@ -5,7 +5,10 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 import static org.eulu.predatorprey.Constants.DIRECTIONS;
 import static org.eulu.predatorprey.Constants.MIN_SIZE;
@@ -77,7 +80,7 @@ public class Simulation {
                 if (animalClass == Prey.class) {
                     newAnimal = new Prey(x, y, this.preyReproductionAge, this.preyReproductionPeriod);
                 } else if (animalClass == Predator.class) {
-                    newAnimal = new Predator(x, y, this.predatorReproductionAge, this.predatorReproductionPeriod);
+                    newAnimal = new Predator(x, y, this.predatorReproductionAge, this.predatorReproductionPeriod, this.predatorNoFoodPeriod);
                 }
                 this.board[x][y] = newAnimal;
                 numCells--;
@@ -126,6 +129,7 @@ public class Simulation {
         this.tempBoard = new boolean[this.xSize][this.ySize];
         this.movePreys();
         this.movePredators();
+        this.removeDead();
         this.drawAnimalsOnBoard();
     }
 
@@ -174,10 +178,12 @@ public class Simulation {
             this.board[oldX][oldY] = null;
             predator.setX(preyCoordinates[0]);
             predator.setY(preyCoordinates[1]);
+            predator.eat();
             this.board[preyCoordinates[0]][preyCoordinates[1]] = predator;
             this.tempBoard[preyCoordinates[0]][preyCoordinates[1]] = true;
         } else {
             this.moveToEmpty(predator);
+            predator.increaseHunger();
         }
     }
 
@@ -221,5 +227,18 @@ public class Simulation {
         }
 
         return preyNeighbors;
+    }
+
+    private void removeDead() {
+        for (int y = 0; y < this.ySize; y++) {
+            for (int x = 0; x < this.xSize; x++) {
+                if (this.board[x][y] instanceof Predator predator) {
+                    if (predator.isDead()) {
+                        this.board[x][y] = null;
+                        this.tempBoard[x][y] = false;
+                    }
+                }
+            }
+        }
     }
 }
