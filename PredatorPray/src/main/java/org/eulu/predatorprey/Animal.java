@@ -7,17 +7,19 @@ import java.util.Random;
 public class Animal {
     private int x;
     private int y;
-    private Color yangColor;
-    private Color oldColor;
     private int age;
     private int reproductionAge;
+    private int reproductionPeriod;
+    private Color yangColor;
+    private Color oldColor;
 
-    public Animal(int x, int y, int reproductionAge) {
+    public Animal(int x, int y, int reproductionAge, int reproductionPeriod) {
         Random random = new Random();
         this.x = x;
         this.y = y;
         this.reproductionAge = reproductionAge;
         this.age = random.nextInt(this.reproductionAge);
+        this.reproductionPeriod = reproductionPeriod;
     }
 
     public int getX() {
@@ -70,5 +72,13 @@ public class Animal {
 
     public void setOldColor(Color oldColor) {
         this.oldColor = oldColor;
+    }
+
+    public int getReproductionPeriod() {
+        return reproductionPeriod;
+    }
+
+    public void setReproductionPeriod(int reproductionPeriod) {
+        this.reproductionPeriod = reproductionPeriod;
     }
 }
