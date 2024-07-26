@@ -29,6 +29,8 @@ public class Simulation {
     private final Animal[][] board;
     private boolean[][] tempBoard;
     private int epochNumber;
+    private List<Prey> preysList;
+    private List<Predator> predatorsList;
 
     public Simulation(StackPane parent, int xSize, int ySize, int preyCount, int preyReproductionAge, int preyReproductionPeriod, int predatorCount, int predatorReproductionAge, int predatorReproductionPeriod, int predatorNoFoodPeriod) {
         this.canvas = new Canvas(MIN_SIZE, MIN_SIZE);
@@ -129,30 +131,30 @@ public class Simulation {
         this.tempBoard = new boolean[this.xSize][this.ySize];
         this.movePreys();
         this.movePredators();
-        this.reproduce();
+//        this.reproduce();
         this.removeDead();
         this.drawAnimalsOnBoard();
     }
 
     private void movePreys() {
-        List<Prey> preysList = getAnimalsOfType(Prey.class);
-        Collections.shuffle(preysList);
+        this.preysList = getAnimalsOfType(Prey.class);
+        Collections.shuffle(this.preysList);
 
-        for (Prey prey : preysList) {
-            this.moveToEmpty(prey);
+        for (Prey prey : this.preysList) {
+            this.moveToEmptyCell(prey);
         }
     }
 
     private void movePredators() {
-        List<Predator> predatorsList = getAnimalsOfType(Predator.class);
-        Collections.shuffle(predatorsList);
+        this.predatorsList = getAnimalsOfType(Predator.class);
+        Collections.shuffle(this.predatorsList);
 
-        for (Predator predator : predatorsList) {
+        for (Predator predator : this.predatorsList) {
             this.moveToEat(predator);
         }
     }
 
-    private void moveToEmpty(Animal animal) {
+    private void moveToEmptyCell(Animal animal) {
         int oldX = animal.getX();
         int oldY = animal.getY();
         List<int[]> emptyNeighbors = getEmptyNeighbors(oldX, oldY);
@@ -183,7 +185,7 @@ public class Simulation {
             this.board[preyCoordinates[0]][preyCoordinates[1]] = predator;
             this.tempBoard[preyCoordinates[0]][preyCoordinates[1]] = true;
         } else {
-            this.moveToEmpty(predator);
+            this.moveToEmptyCell(predator);
             predator.increaseHunger();
         }
     }
@@ -258,14 +260,13 @@ public class Simulation {
     }
 
     private void removeDead() {
-        for (int y = 0; y < this.ySize; y++) {
-            for (int x = 0; x < this.xSize; x++) {
-                if (this.board[x][y] instanceof Predator predator) {
-                    if (predator.isDead()) {
-                        this.board[x][y] = null;
-                        this.tempBoard[x][y] = false;
-                    }
-                }
+        for (Predator predator : this.predatorsList) {
+            int x = predator.getX();
+            int y = predator.getY();
+
+            if (predator.isDead()) {
+                this.board[x][y] = null;
+                this.tempBoard[x][y] = false;
             }
         }
     }
