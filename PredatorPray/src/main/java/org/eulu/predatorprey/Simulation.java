@@ -5,10 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static org.eulu.predatorprey.Constants.DIRECTIONS;
 import static org.eulu.predatorprey.Constants.MIN_SIZE;
@@ -29,7 +26,6 @@ public class Simulation {
     private final Animal[][] board;
     private boolean[][] tempBoard;
     private int epochNumber;
-    private List<Prey> preysList;
     private List<Predator> predatorsList;
 
     public Simulation(StackPane parent, int xSize, int ySize, int preyCount, int preyReproductionAge, int preyReproductionPeriod, int predatorCount, int predatorReproductionAge, int predatorReproductionPeriod, int predatorNoFoodPeriod) {
@@ -45,7 +41,8 @@ public class Simulation {
         this.predatorReproductionAge = predatorReproductionAge;
         this.predatorReproductionPeriod = predatorReproductionPeriod;
         this.predatorNoFoodPeriod = predatorNoFoodPeriod;
-        this.board = new Animal[xSize][ySize];
+        this.board = new Animal[ySize][xSize];
+        this.tempBoard = new boolean[ySize][xSize];
         this.epochNumber = 0;
     }
 
@@ -75,16 +72,16 @@ public class Simulation {
         Animal newAnimal = null;
 
         while (numCells > 0) {
-            int x = random.nextInt(this.xSize);
             int y = random.nextInt(this.ySize);
+            int x = random.nextInt(this.xSize);
 
-            if (this.board[x][y] == null) {
+            if (this.board[y][x] == null) {
                 if (animalClass == Prey.class) {
                     newAnimal = new Prey(x, y, this.preyReproductionAge, this.preyReproductionPeriod);
                 } else if (animalClass == Predator.class) {
                     newAnimal = new Predator(x, y, this.predatorReproductionAge, this.predatorReproductionPeriod, this.predatorNoFoodPeriod);
                 }
-                this.board[x][y] = newAnimal;
+                this.board[y][x] = newAnimal;
                 numCells--;
             }
         }
@@ -95,7 +92,7 @@ public class Simulation {
 
         for (int y = 0; y < this.ySize; y++) {
             for (int x = 0; x < this.xSize; x++) {
-                Animal animal = this.board[x][y];
+                Animal animal = this.board[y][x];
                 if (animal instanceof Prey) {
                     if (animal.getAge() <= animal.getReproductionAge()) {
                         g.setFill(animal.getYangColor());
@@ -111,7 +108,8 @@ public class Simulation {
                 } else {
                     g.setFill(Color.LIGHTGRAY);
                 }
-                g.fillRect(y * this.cellSize, x * this.cellSize, this.cellSize, this.cellSize);
+                g.fillRect(x * this.cellSize, y * this.cellSize, this.cellSize, this.cellSize);
+                g.setFill(Color.BLACK);
             }
         }
 
@@ -127,20 +125,23 @@ public class Simulation {
     }
 
     public void runEpoch() {
+        for (int y = 0; y < this.ySize; y++) {
+            Arrays.fill(this.tempBoard[y], false);
+        }
+
         this.epochNumber++;
-        this.tempBoard = new boolean[this.xSize][this.ySize];
         this.movePreys();
         this.movePredators();
-//        this.reproduce();
+        this.reproduce();
         this.removeDead();
         this.drawAnimalsOnBoard();
     }
 
     private void movePreys() {
-        this.preysList = getAnimalsOfType(Prey.class);
-        Collections.shuffle(this.preysList);
+        List<Prey> preysList = getAnimalsOfType(Prey.class);
+        Collections.shuffle(preysList);
 
-        for (Prey prey : this.preysList) {
+        for (Prey prey : preysList) {
             this.moveToEmptyCell(prey);
         }
     }
@@ -155,32 +156,34 @@ public class Simulation {
     }
 
     private void moveToEmptyCell(Animal animal) {
-        int oldX = animal.getX();
         int oldY = animal.getY();
-        List<int[]> emptyNeighbors = getEmptyNeighbors(oldX, oldY);
+        int oldX = animal.getX();
+        List<int[]> emptyNeighbors = getEmptyNeighbors(oldY, oldX);
 
         if (!emptyNeighbors.isEmpty()) {
             int[] newCoordinates = emptyNeighbors.get(new Random().nextInt(emptyNeighbors.size()));
-            this.board[oldX][oldY] = null;
-            animal.setX(newCoordinates[0]);
-            animal.setY(newCoordinates[1]);
+            this.board[oldY][oldX] = null;
+            this.tempBoard[oldY][oldX] = false;
+            animal.setY(newCoordinates[0]);
+            animal.setX(newCoordinates[1]);
             this.board[newCoordinates[0]][newCoordinates[1]] = animal;
             this.tempBoard[newCoordinates[0]][newCoordinates[1]] = true;
         } else {
-            this.tempBoard[oldX][oldY] = true;
+            this.tempBoard[oldY][oldX] = true;
         }
     }
 
     private void moveToEat(Predator predator) {
-        int oldX = predator.getX();
         int oldY = predator.getY();
-        List<int[]> preyNeighbors = getNeighborsToEat(oldX, oldY);
+        int oldX = predator.getX();
+        List<int[]> preyNeighbors = getNeighborsToEat(oldY, oldX);
 
         if (!preyNeighbors.isEmpty()) {
             int[] preyCoordinates = preyNeighbors.get(new Random().nextInt(preyNeighbors.size()));
-            this.board[oldX][oldY] = null;
-            predator.setX(preyCoordinates[0]);
-            predator.setY(preyCoordinates[1]);
+            this.board[oldY][oldX] = null;
+            this.tempBoard[oldY][oldX] = false;
+            predator.setY(preyCoordinates[0]);
+            predator.setX(preyCoordinates[1]);
             predator.eat();
             this.board[preyCoordinates[0]][preyCoordinates[1]] = predator;
             this.tempBoard[preyCoordinates[0]][preyCoordinates[1]] = true;
@@ -195,8 +198,8 @@ public class Simulation {
 
         for (int y = 0; y < this.ySize; y++) {
             for (int x = 0; x < this.xSize; x++) {
-                if (animalType.isInstance(this.board[x][y])) {
-                    animalsList.add(animalType.cast(this.board[x][y]));
+                if (animalType.isInstance(this.board[y][x])) {
+                    animalsList.add(animalType.cast(this.board[y][x]));
                 }
             }
         }
@@ -204,28 +207,28 @@ public class Simulation {
         return animalsList;
     }
 
-    private List<int[]> getEmptyNeighbors(int x, int y) {
+    private List<int[]> getEmptyNeighbors(int y, int x) {
         List<int[]> emptyNeighbors = new ArrayList<>();
 
         for (int[] dir : DIRECTIONS) {
-            int newX = (x + dir[0] + this.xSize) % this.xSize;
             int newY = (y + dir[1] + this.ySize) % this.ySize;
-            if (this.board[newX][newY] == null && !this.tempBoard[newX][newY]) {
-                emptyNeighbors.add(new int[]{newX, newY});
+            int newX = (x + dir[0] + this.xSize) % this.xSize;
+            if (this.board[newY][newX] == null && !this.tempBoard[newY][newX]) {
+                emptyNeighbors.add(new int[]{newY, newX});
             }
         }
 
         return emptyNeighbors;
     }
 
-    private List<int[]> getNeighborsToEat(int x, int y) {
+    private List<int[]> getNeighborsToEat(int y, int x) {
         List<int[]> preyNeighbors = new ArrayList<>();
 
         for (int[] dir : DIRECTIONS) {
-            int newX = (x + dir[0] + this.xSize) % this.xSize;
             int newY = (y + dir[1] + this.ySize) % this.ySize;
-            if (this.board[newX][newY] instanceof Prey && this.tempBoard[newX][newY]) {
-                preyNeighbors.add(new int[]{newX, newY});
+            int newX = (x + dir[0] + this.xSize) % this.xSize;
+            if (this.board[newY][newX] instanceof Prey && this.tempBoard[newY][newX]) {
+                preyNeighbors.add(new int[]{newY, newX});
             }
         }
 
@@ -233,12 +236,27 @@ public class Simulation {
     }
 
     private void reproduce() {
+        List<Animal> newborns = getAllNewborns();
+
+        for (Animal newborn : newborns) {
+            List<int[]> emptyNeighbors = getEmptyNeighbors(newborn.getY(), newborn.getX());
+            if (!emptyNeighbors.isEmpty()) {
+                int[] newPos = emptyNeighbors.get(new Random().nextInt(emptyNeighbors.size()));
+                int y = newPos[0];
+                int x = newPos[1];
+                this.board[y][x] = newborn;
+                this.tempBoard[y][x] = true;
+            }
+        }
+    }
+
+    private List<Animal> getAllNewborns() {
         List<Animal> newborns = new ArrayList<>();
 
         for (int y = 0; y < this.ySize; y++) {
             for (int x = 0; x < this.xSize; x++) {
-                if (this.board[x][y] != null) {
-                    Animal animal = this.board[x][y];
+                if (this.board[y][x] != null) {
+                    Animal animal = this.board[y][x];
                     animal.incrementAge();
                     if (animal.canReproduce()) {
                         Animal newborn = animal.reproduce();
@@ -250,23 +268,17 @@ public class Simulation {
             }
         }
 
-        for (Animal newborn : newborns) {
-            List<int[]> emptyNeighbors = getEmptyNeighbors(newborn.getX(), newborn.getY());
-            if (!emptyNeighbors.isEmpty()) {
-                int[] newPos = emptyNeighbors.get(new Random().nextInt(emptyNeighbors.size()));
-                this.board[newPos[0]][newPos[1]] = newborn;
-            }
-        }
+        return newborns;
     }
 
     private void removeDead() {
         for (Predator predator : this.predatorsList) {
-            int x = predator.getX();
             int y = predator.getY();
+            int x = predator.getX();
 
             if (predator.isDead()) {
-                this.board[x][y] = null;
-                this.tempBoard[x][y] = false;
+                this.board[y][x] = null;
+                this.tempBoard[y][x] = false;
             }
         }
     }
