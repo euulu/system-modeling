@@ -1,9 +1,12 @@
 package org.eulu.predatorprey;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +31,8 @@ public class Simulation {
     private final int predatorNoFoodPeriod;
     private final Animal[][] board;
     private int epochNumber;
+    private final Timeline timeline;
+    private boolean isSimulationPlaying = false;
 
     public Simulation(StackPane parent, int xSize, int ySize, int preyCount, int preyReproductionAge, int preyReproductionPeriod, int predatorCount, int predatorReproductionAge, int predatorReproductionPeriod, int predatorNoFoodPeriod) {
         this.canvas = new Canvas(MIN_SIZE, MIN_SIZE);
@@ -44,9 +49,14 @@ public class Simulation {
         this.predatorNoFoodPeriod = predatorNoFoodPeriod;
         this.board = new Animal[ySize][xSize];
         this.epochNumber = 0;
+
+        this.timeline = new Timeline(new KeyFrame(Duration.millis(500), actionEvent -> this.runEpoch()));
+        this.timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
     public void initializeCanvas() {
+        this.timeline.stop();
+
         if (!this.parent.getChildren().isEmpty()) {
             this.parent.getChildren().clear();
         }
@@ -120,6 +130,15 @@ public class Simulation {
         for (int y = 0; y <= this.ySize; y++) {
             g.strokeLine(0, y * this.cellSize, this.canvas.getWidth(), y * this.cellSize);
         }
+    }
+
+    public void start() {
+        if (isSimulationPlaying) {
+            this.timeline.pause();
+        } else {
+            this.timeline.play();
+        }
+        isSimulationPlaying = !isSimulationPlaying;
     }
 
     public void runEpoch() {
