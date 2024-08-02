@@ -108,14 +108,6 @@ public class Simulation {
                     }
                 }
                 g.fillRect(x * this.cellSize, y * this.cellSize, this.cellSize, this.cellSize);
-                g.setFill(Color.BLACK);
-                g.fillText("x: " + x + ", y: " + y, x * this.cellSize, y * this.cellSize + 15);
-                if (animal != null) {
-                    g.fillText("x: " + animal.getX() + ", y: " + animal.getY(), x * this.cellSize, y * this.cellSize + 30);
-                    g.fillText(animal.getClass().getSimpleName(), x * this.cellSize, y * this.cellSize + 45);
-                    g.fillText("age: " + animal.getAge(), x * this.cellSize, y * this.cellSize + 60);
-                    g.fillText("rep age: " + animal.getReproductionAge(), x * this.cellSize, y * this.cellSize + 75);
-                }
             }
         }
 
