@@ -45,6 +45,8 @@ public class Controller implements Initializable {
     public Label lblPreyBorn;
     @FXML
     public Label lblPredatorBorn;
+    @FXML
+    public Label lblPreyDied;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -114,6 +116,11 @@ public class Controller implements Initializable {
             lblPredatorBorn.textProperty().bind(
                     Bindings.createStringBinding(
                             () -> String.valueOf(simulation.getPredatorsBorn()), simulation.predatorsBornProperty()
+                    )
+            );
+            lblPreyDied.textProperty().bind(
+                    Bindings.createStringBinding(
+                            () -> String.valueOf(simulation.getPreysDied()), simulation.preysDiedProperty()
                     )
             );
         }

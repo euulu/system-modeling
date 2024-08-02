@@ -40,6 +40,7 @@ public class Simulation {
     private final IntegerProperty predators;
     private final IntegerProperty preysBorn;
     private final IntegerProperty predatorsBorn;
+    private final IntegerProperty preysDied;
 
     public Simulation(StackPane parent, int xSize, int ySize, int preyCount, int preyReproductionAge, int preyReproductionPeriod, int predatorCount, int predatorReproductionAge, int predatorReproductionPeriod, int predatorNoFoodPeriod) {
         this.canvas = new Canvas(MIN_SIZE, MIN_SIZE);
@@ -61,6 +62,7 @@ public class Simulation {
         this.predators = new SimpleIntegerProperty(predatorCount);
         this.preysBorn = new SimpleIntegerProperty(0);
         this.predatorsBorn = new SimpleIntegerProperty(0);
+        this.preysDied = new SimpleIntegerProperty(0);
 
         this.timeline = new Timeline(new KeyFrame(Duration.millis(500), actionEvent -> this.runEpoch()));
         this.timeline.setCycleCount(Timeline.INDEFINITE);
@@ -215,6 +217,7 @@ public class Simulation {
             predator.setX(preyCoordinates[1]);
             predator.eat();
             this.board[preyCoordinates[0]][preyCoordinates[1]] = predator;
+            this.preysDied.set(this.preysDied.get() + 1);
         } else {
             predator.increaseHunger();
             this.moveToEmptyCell(predator);
@@ -351,5 +354,13 @@ public class Simulation {
 
     public IntegerProperty predatorsBornProperty() {
         return predatorsBorn;
+    }
+
+    public int getPreysDied() {
+        return preysDied.get();
+    }
+
+    public IntegerProperty preysDiedProperty() {
+        return preysDied;
     }
 }
