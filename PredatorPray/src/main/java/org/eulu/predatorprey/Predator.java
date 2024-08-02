@@ -6,8 +6,8 @@ public class Predator extends Animal {
     private final int predatorNoFoodPeriod;
     private int hunger;
 
-    public Predator(int x, int y, int reproductionAge, int reproductionPeriod, int predatorNoFoodPeriod) {
-        super(x, y, reproductionAge, reproductionPeriod);
+    public Predator(int y, int x, int reproductionAge, int reproductionPeriod, int predatorNoFoodPeriod) {
+        super(y, x, reproductionAge, reproductionPeriod);
         this.predatorNoFoodPeriod = predatorNoFoodPeriod;
         this.hunger = 0;
         this.setYangColor(Color.web("#ff795b"));
@@ -29,6 +29,6 @@ public class Predator extends Animal {
     @Override
     public Animal reproduce() {
         this.lastReproduction = this.age;
-        return new Predator(this.getX(), this.getY(), this.reproductionAge, this.reproductionPeriod, this.predatorNoFoodPeriod);
+        return new Predator(this.getY(), this.getX(), this.reproductionAge, this.reproductionPeriod, this.predatorNoFoodPeriod);
     }
 }

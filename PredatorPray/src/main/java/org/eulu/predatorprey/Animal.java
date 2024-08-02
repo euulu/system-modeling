@@ -14,10 +14,10 @@ public abstract class Animal {
     private Color yangColor;
     private Color oldColor;
 
-    public Animal(int x, int y, int reproductionAge, int reproductionPeriod) {
+    public Animal(int y, int x, int reproductionAge, int reproductionPeriod) {
         Random random = new Random();
-        this.x = x;
         this.y = y;
+        this.x = x;
         this.reproductionAge = reproductionAge;
         this.age = random.nextInt(this.reproductionAge);
         this.reproductionPeriod = reproductionPeriod;
