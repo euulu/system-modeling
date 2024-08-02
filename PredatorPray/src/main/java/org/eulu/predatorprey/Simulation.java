@@ -2,6 +2,8 @@ package org.eulu.predatorprey;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
@@ -30,9 +32,10 @@ public class Simulation {
     private final int predatorReproductionPeriod;
     private final int predatorNoFoodPeriod;
     private final Animal[][] board;
-    private int epochNumber;
     private final Timeline timeline;
     private boolean isSimulationPlaying = false;
+
+    private IntegerProperty epochNumber;
 
     public Simulation(StackPane parent, int xSize, int ySize, int preyCount, int preyReproductionAge, int preyReproductionPeriod, int predatorCount, int predatorReproductionAge, int predatorReproductionPeriod, int predatorNoFoodPeriod) {
         this.canvas = new Canvas(MIN_SIZE, MIN_SIZE);
@@ -48,7 +51,8 @@ public class Simulation {
         this.predatorReproductionPeriod = predatorReproductionPeriod;
         this.predatorNoFoodPeriod = predatorNoFoodPeriod;
         this.board = new Animal[ySize][xSize];
-        this.epochNumber = 0;
+
+        this.epochNumber = new SimpleIntegerProperty(0);
 
         this.timeline = new Timeline(new KeyFrame(Duration.millis(500), actionEvent -> this.runEpoch()));
         this.timeline.setCycleCount(Timeline.INDEFINITE);
@@ -142,7 +146,7 @@ public class Simulation {
     }
 
     public void runEpoch() {
-        this.epochNumber++;
+        this.epochNumber.set(this.epochNumber.get() + 1);
         this.movePreys();
         this.movePredators();
         this.reproduce();
@@ -286,5 +290,13 @@ public class Simulation {
                 }
             }
         }
+    }
+
+    public int getEpochNumber() {
+        return epochNumber.get();
+    }
+
+    public IntegerProperty epochNumberProperty() {
+        return epochNumber;
     }
 }

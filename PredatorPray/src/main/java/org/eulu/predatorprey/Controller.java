@@ -1,6 +1,7 @@
 package org.eulu.predatorprey;
 
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -34,6 +35,8 @@ public class Controller implements Initializable {
     public MFXTextField tfPredatorNoFoodPeriod;
     @FXML
     public Label lblTextFieldError;
+    @FXML
+    public Label lblEvolutionStep;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,6 +69,8 @@ public class Controller implements Initializable {
 
         this.simulation = new Simulation(spEcosystem, xSize, ySize, preyCount, preyReproductionAge, preyReproductionPeriod, predatorCount, predatorReproductionAge, predatorReproductionPeriod, predatorNoFoodPeriod);
         this.simulation.initializeCanvas();
+
+        createBindings();
     }
 
     public void onBtnStep() {
@@ -74,5 +79,15 @@ public class Controller implements Initializable {
 
     public void onBtnStart() {
         this.simulation.start();
+    }
+
+    private void createBindings() {
+        if (simulation != null) {
+            lblEvolutionStep.textProperty().bind(
+                    Bindings.createStringBinding(
+                            () -> String.valueOf(simulation.getEpochNumber()), simulation.epochNumberProperty()
+                    )
+            );
+        }
     }
 }
