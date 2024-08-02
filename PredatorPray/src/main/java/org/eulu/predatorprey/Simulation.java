@@ -37,6 +37,7 @@ public class Simulation {
 
     private final IntegerProperty epochNumber;
     private final IntegerProperty preys;
+    private final IntegerProperty predators;
 
     public Simulation(StackPane parent, int xSize, int ySize, int preyCount, int preyReproductionAge, int preyReproductionPeriod, int predatorCount, int predatorReproductionAge, int predatorReproductionPeriod, int predatorNoFoodPeriod) {
         this.canvas = new Canvas(MIN_SIZE, MIN_SIZE);
@@ -55,6 +56,7 @@ public class Simulation {
 
         this.epochNumber = new SimpleIntegerProperty(0);
         this.preys = new SimpleIntegerProperty(preyCount);
+        this.predators = new SimpleIntegerProperty(predatorCount);
 
         this.timeline = new Timeline(new KeyFrame(Duration.millis(500), actionEvent -> this.runEpoch()));
         this.timeline.setCycleCount(Timeline.INDEFINITE);
@@ -106,6 +108,7 @@ public class Simulation {
     private void drawAnimalsOnBoard() {
         GraphicsContext g = this.canvas.getGraphicsContext2D();
         int preysOnBoard = 0;
+        int predatorsOnBoard = 0;
 
         for (int y = 0; y < this.ySize; y++) {
             for (int x = 0; x < this.xSize; x++) {
@@ -119,6 +122,7 @@ public class Simulation {
                         g.setFill(animal.getOldColor());
                     }
                 } else if (animal instanceof Predator) {
+                    predatorsOnBoard++;
                     if (animal.getAge() < animal.getReproductionAge()) {
                         g.setFill(animal.getYangColor());
                     } else {
@@ -130,6 +134,7 @@ public class Simulation {
         }
 
         this.preys.set(preysOnBoard);
+        this.predators.set(predatorsOnBoard);
 
         g.setLineWidth(0.5f);
         g.setStroke(Color.GRAY);
@@ -312,5 +317,13 @@ public class Simulation {
 
     public IntegerProperty preysProperty() {
         return preys;
+    }
+
+    public int getPredators() {
+        return predators.get();
+    }
+
+    public IntegerProperty predatorsProperty() {
+        return predators;
     }
 }

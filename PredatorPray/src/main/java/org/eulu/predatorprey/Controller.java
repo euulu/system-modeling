@@ -39,6 +39,8 @@ public class Controller implements Initializable {
     public Label lblEvolutionStep;
     @FXML
     public Label lblPreyCount;
+    @FXML
+    public Label lblPredatorCount;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -93,6 +95,11 @@ public class Controller implements Initializable {
             lblPreyCount.textProperty().bind(
                     Bindings.createStringBinding(
                             () -> String.valueOf(simulation.getPreys()), simulation.preysProperty()
+                    )
+            );
+            lblPredatorCount.textProperty().bind(
+                    Bindings.createStringBinding(
+                            () -> String.valueOf(simulation.getPredators()), simulation.predatorsProperty()
                     )
             );
         }
