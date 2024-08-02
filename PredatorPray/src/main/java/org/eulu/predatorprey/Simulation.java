@@ -38,7 +38,8 @@ public class Simulation {
     private final IntegerProperty epochNumber;
     private final IntegerProperty preys;
     private final IntegerProperty predators;
-    private final IntegerProperty preyBorn;
+    private final IntegerProperty preysBorn;
+    private final IntegerProperty predatorsBorn;
 
     public Simulation(StackPane parent, int xSize, int ySize, int preyCount, int preyReproductionAge, int preyReproductionPeriod, int predatorCount, int predatorReproductionAge, int predatorReproductionPeriod, int predatorNoFoodPeriod) {
         this.canvas = new Canvas(MIN_SIZE, MIN_SIZE);
@@ -58,7 +59,8 @@ public class Simulation {
         this.epochNumber = new SimpleIntegerProperty(0);
         this.preys = new SimpleIntegerProperty(preyCount);
         this.predators = new SimpleIntegerProperty(predatorCount);
-        this.preyBorn = new SimpleIntegerProperty(0);
+        this.preysBorn = new SimpleIntegerProperty(0);
+        this.predatorsBorn = new SimpleIntegerProperty(0);
 
         this.timeline = new Timeline(new KeyFrame(Duration.millis(500), actionEvent -> this.runEpoch()));
         this.timeline.setCycleCount(Timeline.INDEFINITE);
@@ -272,7 +274,10 @@ public class Simulation {
                 int x = newPos[1];
                 this.board[y][x] = newborn;
                 if (newborn instanceof Prey) {
-                    this.preyBorn.set(this.preyBorn.get() + 1);
+                    this.preysBorn.set(this.preysBorn.get() + 1);
+                }
+                if (newborn instanceof Predator) {
+                    this.predatorsBorn.set(this.predatorsBorn.get() + 1);
                 }
             }
         }
@@ -332,11 +337,19 @@ public class Simulation {
         return predators;
     }
 
-    public int getPreyBorn() {
-        return preyBorn.get();
+    public int getPreysBorn() {
+        return preysBorn.get();
     }
 
-    public IntegerProperty preyBornProperty() {
-        return preyBorn;
+    public IntegerProperty preysBornProperty() {
+        return preysBorn;
+    }
+
+    public int getPredatorsBorn() {
+        return predatorsBorn.get();
+    }
+
+    public IntegerProperty predatorsBornProperty() {
+        return predatorsBorn;
     }
 }
