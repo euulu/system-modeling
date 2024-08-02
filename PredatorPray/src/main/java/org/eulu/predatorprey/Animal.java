@@ -15,11 +15,12 @@ public abstract class Animal {
     private Color oldColor;
 
     public Animal(int y, int x, int reproductionAge, int reproductionPeriod) {
-        Random random = new Random();
         this.y = y;
         this.x = x;
         this.reproductionAge = reproductionAge;
-        this.age = random.nextInt(this.reproductionAge);
+        int randomAge = new Random().nextInt(this.reproductionAge);
+        this.age = randomAge;
+        this.lastReproduction = randomAge;
         this.reproductionPeriod = reproductionPeriod;
     }
 

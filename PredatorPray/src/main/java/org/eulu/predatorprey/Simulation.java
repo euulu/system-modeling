@@ -76,7 +76,6 @@ public class Simulation {
             int x = random.nextInt(this.xSize);
 
             if (this.board[y][x] == null) {
-                // TODO: fix last reproduction
                 if (animalClass == Prey.class) {
                     newAnimal = new Prey(y, x, this.preyReproductionAge, this.preyReproductionPeriod);
                 } else if (animalClass == Predator.class) {
