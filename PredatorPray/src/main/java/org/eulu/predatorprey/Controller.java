@@ -37,6 +37,8 @@ public class Controller implements Initializable {
     public Label lblTextFieldError;
     @FXML
     public Label lblEvolutionStep;
+    @FXML
+    public Label lblPreyCount;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,6 +88,11 @@ public class Controller implements Initializable {
             lblEvolutionStep.textProperty().bind(
                     Bindings.createStringBinding(
                             () -> String.valueOf(simulation.getEpochNumber()), simulation.epochNumberProperty()
+                    )
+            );
+            lblPreyCount.textProperty().bind(
+                    Bindings.createStringBinding(
+                            () -> String.valueOf(simulation.getPreys()), simulation.preysProperty()
                     )
             );
         }

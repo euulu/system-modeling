@@ -35,7 +35,8 @@ public class Simulation {
     private final Timeline timeline;
     private boolean isSimulationPlaying = false;
 
-    private IntegerProperty epochNumber;
+    private final IntegerProperty epochNumber;
+    private final IntegerProperty preys;
 
     public Simulation(StackPane parent, int xSize, int ySize, int preyCount, int preyReproductionAge, int preyReproductionPeriod, int predatorCount, int predatorReproductionAge, int predatorReproductionPeriod, int predatorNoFoodPeriod) {
         this.canvas = new Canvas(MIN_SIZE, MIN_SIZE);
@@ -53,6 +54,7 @@ public class Simulation {
         this.board = new Animal[ySize][xSize];
 
         this.epochNumber = new SimpleIntegerProperty(0);
+        this.preys = new SimpleIntegerProperty(preyCount);
 
         this.timeline = new Timeline(new KeyFrame(Duration.millis(500), actionEvent -> this.runEpoch()));
         this.timeline.setCycleCount(Timeline.INDEFINITE);
@@ -103,12 +105,14 @@ public class Simulation {
 
     private void drawAnimalsOnBoard() {
         GraphicsContext g = this.canvas.getGraphicsContext2D();
+        int preysOnBoard = 0;
 
         for (int y = 0; y < this.ySize; y++) {
             for (int x = 0; x < this.xSize; x++) {
                 Animal animal = this.board[y][x];
                 g.setFill(Color.LIGHTGRAY);
                 if (animal instanceof Prey) {
+                    preysOnBoard++;
                     if (animal.getAge() < animal.getReproductionAge()) {
                         g.setFill(animal.getYangColor());
                     } else {
@@ -124,6 +128,8 @@ public class Simulation {
                 g.fillRect(x * this.cellSize, y * this.cellSize, this.cellSize, this.cellSize);
             }
         }
+
+        this.preys.set(preysOnBoard);
 
         g.setLineWidth(0.5f);
         g.setStroke(Color.GRAY);
@@ -298,5 +304,13 @@ public class Simulation {
 
     public IntegerProperty epochNumberProperty() {
         return epochNumber;
+    }
+
+    public int getPreys() {
+        return preys.get();
+    }
+
+    public IntegerProperty preysProperty() {
+        return preys;
     }
 }
