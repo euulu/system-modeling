@@ -144,6 +144,11 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Результат роботи симуляці \"Хижак-Жертва\"");
             stage.setScene(scene);
+
+            StatisticsCharts statChartsController = fxmlLoader.getController();
+            statChartsController.addDataToQuantitySeries(simulation.getPreyNumberByEpoch(), "Жертви");
+            statChartsController.addDataToQuantitySeries(simulation.getPredatorNumberByEpoch(), "Хижаки");
+
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);

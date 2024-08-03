@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="750.0" minWidth="900.0" prefHeight="750.0" prefWidth="900.0"
-      xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+      stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.eulu.predatorprey.StatisticsCharts">
     <children>
         <Label text="Залежність чисельності жертв та хижачік від часу">
@@ -13,7 +13,7 @@
                 <Insets left="70.0"/>
             </VBox.margin>
         </Label>
-        <LineChart fx:id="quantity" VBox.vgrow="ALWAYS">
+        <LineChart fx:id="quantity" animated="false" VBox.vgrow="ALWAYS">
             <xAxis>
                 <NumberAxis label="Епоха" side="BOTTOM"/>
             </xAxis>
@@ -30,7 +30,7 @@
                 <Insets left="70.0"/>
             </VBox.margin>
         </Label>
-        <LineChart fx:id="increase">
+        <LineChart fx:id="increase" animated="false" VBox.vgrow="ALWAYS">
             <xAxis>
                 <NumberAxis label="Епоха" side="BOTTOM"/>
             </xAxis>
