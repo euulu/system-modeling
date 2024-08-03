@@ -3,10 +3,14 @@ package org.eulu.predatorprey;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -130,6 +134,19 @@ public class Controller implements Initializable {
                             () -> String.valueOf(simulation.getPredatorsDied()), simulation.predatorsDiedProperty()
                     )
             );
+        }
+    }
+
+    public void onBtnStats() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("statistics-charts.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Результат роботи симуляці \"Хижак-Жертва\"");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="750.0" minWidth="900.0" prefHeight="750.0" prefWidth="900.0"
+      xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.eulu.predatorprey.StatisticsCharts">
+    <children>
+        <Label text="Залежність чисельності жертв та хижачік від часу">
+            <VBox.margin>
+                <Insets left="70.0"/>
+            </VBox.margin>
+        </Label>
+        <LineChart fx:id="quantity" VBox.vgrow="ALWAYS">
+            <xAxis>
+                <NumberAxis label="Епоха" side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Кількість особин виду" side="LEFT"/>
+            </yAxis>
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+        </LineChart>
+        <Pane maxHeight="20.0" minHeight="20.0" prefHeight="20.0"/>
+        <Label text="Залежність приросту кількості жертв та хижаків від часу">
+            <VBox.margin>
+                <Insets left="70.0"/>
+            </VBox.margin>
+        </Label>
+        <LineChart fx:id="increase">
+            <xAxis>
+                <NumberAxis label="Епоха" side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Кількість особин виду" side="LEFT"/>
+            </yAxis>
+        </LineChart>
+    </children>
+    <padding>
+        <Insets bottom="8.0" left="20.0" right="20.0" top="16.0"/>
+    </padding>
+</VBox>
