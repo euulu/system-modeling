@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<GridPane fx:id="gpWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1024.0" prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.eulu.predatorprey.Controller">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="400.0" percentWidth="70.0" />
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="150.0" percentWidth="30.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="500.0" vgrow="ALWAYS" />
+    </rowConstraints>
+    <VBox styleClass="main-bg" stylesheets="@styles/styles.css">
+        <padding>
+            <Insets bottom="16.0" left="12.0" right="12.0" top="16.0" />
+        </padding>
+        <children>
+         <StackPane fx:id="spEcosystem" prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+            <VBox.margin>
+               <Insets bottom="20.0" />
+            </VBox.margin>
+         </StackPane>
+            <HBox spacing="20.0" styleClass="tile-box" stylesheets="@styles/styles.css">
+                <children>
+                    <AnchorPane minWidth="180.0" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label text="Кількість жертв" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            <Label text="Кількість хижаків" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="28.0" />
+                            <Label text="Такт еволюції" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="56.0" />
+                            <Label fx:id="lblPreyCount" text="0" AnchorPane.rightAnchor="12.0"
+                                   AnchorPane.topAnchor="0.0"/>
+                            <Label fx:id="lblPredatorCount" text="0" AnchorPane.rightAnchor="12.0"
+                                   AnchorPane.topAnchor="28.0"/>
+                            <Label fx:id="lblEvolutionStep" text="0" AnchorPane.rightAnchor="12.0"
+                                   AnchorPane.topAnchor="56.0"/>
+                        </children>
+                    </AnchorPane>
+                    <AnchorPane minWidth="180.0" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label text="Народилося жертв" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            <Label text="Народилося хижаків" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="28.0" />
+                            <Label fx:id="lblPreyBorn" text="0" AnchorPane.rightAnchor="12.0"
+                                   AnchorPane.topAnchor="0.0"/>
+                            <Label fx:id="lblPredatorBorn" text="0" AnchorPane.rightAnchor="12.0"
+                                   AnchorPane.topAnchor="28.0"/>
+                        </children>
+                    </AnchorPane>
+                    <AnchorPane layoutX="367.0" layoutY="22.0" minWidth="180.0" HBox.hgrow="ALWAYS">
+                        <children>
+                            <Label text="Померло жертв" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                            <Label text="Померло хижаків" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="28.0" />
+                            <Label fx:id="lblPreyDied" text="0" AnchorPane.rightAnchor="12.0"
+                                   AnchorPane.topAnchor="0.0"/>
+                            <Label fx:id="lblPredatorDied" text="0" AnchorPane.rightAnchor="12.0"
+                                   AnchorPane.topAnchor="28.0"/>
+                        </children>
+                    </AnchorPane>
+                </children>
+                <padding>
+                    <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                </padding>
+            </HBox>
+        </children>
+    </VBox>
+    <VBox styleClass="sidebar-bg" stylesheets="@styles/styles.css" GridPane.columnIndex="1">
+        <MFXTextField fx:id="tfXSize" borderGap="12.0" floatMode="BORDER" floatingText="Розмір сітки по X" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" stylesheets="@styles/styles.css" text="60">
+            <VBox.margin>
+                <Insets bottom="12.0" />
+            </VBox.margin>
+        </MFXTextField>
+        <MFXTextField fx:id="tfYSize" borderGap="12.0" floatMode="BORDER" floatingText="Розмір сітки по Y" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="60">
+            <VBox.margin>
+                <Insets bottom="12.0" />
+            </VBox.margin>
+        </MFXTextField>
+        <MFXTextField fx:id="tfPreyCount" borderGap="12.0" floatMode="BORDER" floatingText="Кількість жертв" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="100">
+            <VBox.margin>
+                <Insets bottom="12.0" />
+            </VBox.margin>
+        </MFXTextField>
+        <MFXTextField fx:id="tfPreyReproductionAge" borderGap="12.0" floatMode="BORDER" floatingText="Початковий вік розмноження жертв" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="2">
+            <VBox.margin>
+                <Insets bottom="12.0" />
+            </VBox.margin>
+        </MFXTextField>
+        <MFXTextField fx:id="tfPreyReproductionPeriod" borderGap="12.0" floatMode="BORDER" floatingText="Період розмоноження жертв" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="2">
+            <VBox.margin>
+                <Insets bottom="12.0" />
+            </VBox.margin>
+        </MFXTextField>
+        <MFXTextField fx:id="tfPredatorCount" borderGap="12.0" floatMode="BORDER" floatingText="Кількість хижаків" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="30">
+            <VBox.margin>
+                <Insets bottom="12.0" />
+            </VBox.margin>
+        </MFXTextField>
+        <MFXTextField fx:id="tfPredatorReproductionAge" borderGap="12.0" floatMode="BORDER" floatingText="Початковий вік розмноження хижаків" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="5">
+            <VBox.margin>
+                <Insets bottom="12.0" />
+            </VBox.margin>
+        </MFXTextField>
+        <MFXTextField fx:id="tfPredatorReproductionPeriod" borderGap="12.0" floatMode="BORDER" floatingText="Період розмоноження хижаків" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="4">
+            <VBox.margin>
+                <Insets bottom="12.0" />
+            </VBox.margin>
+        </MFXTextField>
+        <MFXTextField fx:id="tfPredatorNoFoodPeriod" borderGap="12.0" floatMode="BORDER" floatingText="Життя хижака без їжі" floatingTextGap="8.0" prefWidth="Infinity" styleClass="validated-field" text="2">
+            <VBox.margin>
+                <Insets bottom="12.0" />
+            </VBox.margin>
+        </MFXTextField>
+
+        <Label fx:id="lblTextFieldError" styleClass="validation-label" textFill="#ef6e6b" visible="false" wrapText="true">
+        <VBox.margin>
+            <Insets bottom="12.0" left="6.0" />
+        </VBox.margin></Label>
+
+        <Pane VBox.vgrow="ALWAYS" />
+        <MFXButton buttonType="RAISED" onAction="#onBtnCreateBoard" prefWidth="Infinity" text="Створити симуляцію" textFill="WHITE">
+            <VBox.margin>
+                <Insets bottom="16.0" />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            </padding>
+        </MFXButton>
+        <MFXButton buttonType="RAISED" onAction="#onBtnStart" prefWidth="Infinity" text="Старт/Пауза" textFill="WHITE">
+            <VBox.margin>
+                <Insets bottom="16.0" />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            </padding>
+        </MFXButton>
+        <MFXButton buttonType="RAISED" onAction="#onBtnStep" prefWidth="Infinity" text="Крок вручну" textFill="WHITE">
+            <VBox.margin>
+                <Insets bottom="16.0"/>
+            </VBox.margin>
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0"/>
+            </padding>
+        </MFXButton>
+        <MFXButton buttonType="RAISED" onAction="#onBtnStats" prefWidth="Infinity" text="Показати статистику"
+                   textFill="WHITE">
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
+            <padding>
+                <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+            </padding>
+        </MFXButton>
+        <padding>
+            <Insets bottom="16.0" left="12.0" right="12.0" top="16.0" />
+        </padding>
+    </VBox>
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+</GridPane>
