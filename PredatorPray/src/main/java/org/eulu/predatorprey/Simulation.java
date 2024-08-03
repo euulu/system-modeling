@@ -19,6 +19,7 @@ import static org.eulu.predatorprey.Constants.DIRECTIONS;
 import static org.eulu.predatorprey.Constants.MIN_SIZE;
 
 public class Simulation {
+    private static final int EPOCH_SPEED = 300;
     private final StackPane parent;
     private final Canvas canvas;
     private final int xSize;
@@ -66,7 +67,7 @@ public class Simulation {
         this.preysDied = new SimpleIntegerProperty(0);
         this.predatorsDied = new SimpleIntegerProperty(0);
 
-        this.timeline = new Timeline(new KeyFrame(Duration.millis(500), actionEvent -> this.runEpoch()));
+        this.timeline = new Timeline(new KeyFrame(Duration.millis(EPOCH_SPEED), actionEvent -> this.runEpoch()));
         this.timeline.setCycleCount(Timeline.INDEFINITE);
     }
 
