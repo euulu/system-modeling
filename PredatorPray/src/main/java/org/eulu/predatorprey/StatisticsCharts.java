@@ -18,16 +18,25 @@ public class StatisticsCharts implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         quantity.setCreateSymbols(false);
+        increase.setCreateSymbols(false);
     }
 
     public void addDataToQuantitySeries(ArrayList<Integer> numberOfAnimalsByEpoch, String seriesName) {
+        addDataToChart(numberOfAnimalsByEpoch, seriesName, quantity);
+    }
+
+    public void addDataToIncreaseSeries(ArrayList<Integer> increaseNumberByEpoch, String seriesName) {
+        addDataToChart(increaseNumberByEpoch, seriesName, increase);
+    }
+
+    private void addDataToChart(ArrayList<Integer> increaseNumberByEpoch, String seriesName, LineChart<Integer, Integer> chart) {
         XYChart.Series<Integer, Integer> animalsSeries = new XYChart.Series<>();
         animalsSeries.setName(seriesName);
 
-        for (int i = 0; i < numberOfAnimalsByEpoch.size(); i++) {
-            animalsSeries.getData().add(new XYChart.Data<>(i, numberOfAnimalsByEpoch.get(i)));
+        for (int i = 0; i < increaseNumberByEpoch.size(); i++) {
+            animalsSeries.getData().add(new XYChart.Data<>(i, increaseNumberByEpoch.get(i)));
         }
 
-        quantity.getData().add(animalsSeries);
+        chart.getData().add(animalsSeries);
     }
 }

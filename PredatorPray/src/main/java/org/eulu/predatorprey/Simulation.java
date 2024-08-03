@@ -46,6 +46,8 @@ public class Simulation {
 
     private final ArrayList<Integer> preyNumberByEpoch = new ArrayList<>();
     private final ArrayList<Integer> predatorNumberByEpoch = new ArrayList<>();
+    private final ArrayList<Integer> preyIncrease = new ArrayList<>();
+    private final ArrayList<Integer> predatorIncrease = new ArrayList<>();
 
     public Simulation(StackPane parent, int xSize, int ySize, int preyCount, int preyReproductionAge, int preyReproductionPeriod, int predatorCount, int predatorReproductionAge, int predatorReproductionPeriod, int predatorNoFoodPeriod) {
         this.canvas = new Canvas(MIN_SIZE, MIN_SIZE);
@@ -150,6 +152,8 @@ public class Simulation {
 
         this.preyNumberByEpoch.add(preysOnBoard);
         this.predatorNumberByEpoch.add(predatorsOnBoard);
+        this.preyIncrease.add(this.preysBorn.get() - this.preysDied.get());
+        this.predatorIncrease.add(this.predatorsBorn.get() - this.predatorsDied.get());
 
         g.setLineWidth(0.5f);
         g.setStroke(Color.GRAY);
@@ -388,5 +392,13 @@ public class Simulation {
 
     public ArrayList<Integer> getPredatorNumberByEpoch() {
         return predatorNumberByEpoch;
+    }
+
+    public ArrayList<Integer> getPreyIncrease() {
+        return preyIncrease;
+    }
+
+    public ArrayList<Integer> getPredatorIncrease() {
+        return predatorIncrease;
     }
 }

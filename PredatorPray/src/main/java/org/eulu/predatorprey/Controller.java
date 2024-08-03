@@ -148,6 +148,8 @@ public class Controller implements Initializable {
             StatisticsCharts statChartsController = fxmlLoader.getController();
             statChartsController.addDataToQuantitySeries(simulation.getPreyNumberByEpoch(), "Жертви");
             statChartsController.addDataToQuantitySeries(simulation.getPredatorNumberByEpoch(), "Хижаки");
+            statChartsController.addDataToIncreaseSeries(simulation.getPreyIncrease(), "Жертви");
+            statChartsController.addDataToIncreaseSeries(simulation.getPredatorIncrease(), "Хижаки");
 
             stage.show();
         } catch (IOException e) {
